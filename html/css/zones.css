@@ -1,0 +1,41 @@
+
+/**
+ * Main pages.
+ * There will be a "Here" page at each screen for the local zone
+ */
+#console {}
+#security {}
+#hvac {}
+#gate {}
+#map {}
+
+/**
+ *	Zones
+ */
+
+#kitchen {}
+#bathroom1 {}
+#lounge {}
+#office {}
+#dining {}
+#sitting {}
+#entrance {}
+#foyer {}
+#pool {}
+#spa {}
+#laundry {}
+#gym-bathroom {}
+#gym {}
+
+#bedroom1 {}
+#ensuite1 {}
+#bedroom2 {}
+#ensuite2 {}
+#bedroom3 {}
+#ensuite3 {}
+
+#patio {}
+#garage {}
+#server-room {}
+#tennis-court {}
+

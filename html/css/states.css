@@ -1,0 +1,39 @@
+
+/* the styled element provides control */
+.control {}
+
+/* the styled element reflects state */
+.state {}
+
+/* ---------------- the 2 states of Binary ----------------- */
+
+/* the Binary true state */
+.true {
+}
+
+/* the Binary false state */
+.false {
+}
+
+
+
+
+/* could we use these classes to show appropriate icons? e.g. .blinds.control.up */
+
+.up {
+}
+
+.down {
+}
+
+.open {
+}
+
+.close {
+}
+
+.lock {
+}
+
+.unlock {
+}
