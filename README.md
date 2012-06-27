@@ -62,11 +62,15 @@ Web interface to
 Credits
 -------
 
+<a href="http://nodejs.org/">Node.js</a>
+
 <a href="https://github.com/yilun/node_mqtt_client">node_mqtt_client</a> MQTTClient module for Node.js. 
 
-<a href="http://socket.io/">Socket.IO</a>
+<a href="http://socket.io/">Socket.IO</a> for both server and client side of web communications.
 
-<a href="http://isotope.metafizzy.co/">Isotope</a> Javascript layout library. This requires a <a href="http://metafizzy.co/#isotope-license">license</a> if you are to use it for commercial purposes. 
+<a href="http://jquery.org/">jQuery</a> and <a href="http://jqueryui.com/">jQeury UI</a>
+
+<a href="http://isotope.metafizzy.co/">Isotope</a> for dynamic Javascript layout. This requires a <a href="http://metafizzy.co/#isotope-license">license</a> if you are to use it for commercial purposes. 
 
 <a href="http://www.biwascheme.org/">BiwaScheme</a> for S-Expression parsing in Javascript and Node.js.
 
