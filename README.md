@@ -1,9 +1,9 @@
-MQTT Socket Gateway and Meem UI
-===============================
+Web Hyperspace Interface via MQTT over Socket.IO (WHIMS)
+================================================
 
-This project provides a web interface a MQTT service. 
+This project provides a web interface a MQTT service.
 A browser or other Socket.IO client communicates to a MQTT server over standard HTTP/1.1 protocols. 
-The topic structure and payload are specified in the Meemplex specifications (to be announced). 
+The topic structure, messages and payload format are specified in the Meemplex specifications (to be announced). 
 S-Expressions are used as payload format.
 
 The intention is that this can provide a gateway for "things" (e.g. devices, browsers, servers) to communicate with other things over standard web protocols.
@@ -12,12 +12,11 @@ This services provides the ability to add a layer of security to things communic
 
 How to Run
 ----------
-The server is implemented in Node.js and may be run with
+The server is implemented in Node.js and depends on a few external modules.
 
 ###Get Required Node.js Modules
 
     > npm install socket.io
-    > npm install connect
     > npm install biwascheme
 
 ###Configure
@@ -35,6 +34,10 @@ Type the following in the root of the project
     > node whims.js
 
 Then navigate to
+
+    http://localhost:8000/
+    
+or if you are running on a different server or changed the serverPort configuration
 
     http://yourhost:yourport/
 
@@ -67,3 +70,4 @@ Credits
 
 <a href="http://www.biwascheme.org/">BiwaScheme</a> for S-Expression parsing in Javascript and Node.js.
 
+<a href="http://www.simplefly.nl/icons">Simplefly</a> for icons on the demonstration UI.
