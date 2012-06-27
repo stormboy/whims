@@ -21,7 +21,6 @@ The server is implemented in Node.js and may be run with
     > npm install biwascheme
 
 ###Configure
----------
 
 Update setting.js to point configure the port for the server to listen on and the connection of your MQTT server.
 
@@ -49,3 +48,22 @@ Lifecycle: pass on health of subscribed topics. Track via last-will-and-testamen
 Hyperspace: maintain a hierarchy of categories corresdonding to topics
 
 Security: subscribe and publish to only those topics that are allowed to the client.
+
+Web interface to
+<ul>
+ <li>register users</li>
+ <li>share topics</li>
+ <li>navigate categories and "things"</li>
+</ul>
+
+Credits
+-------
+
+<a href="https://github.com/yilun/node_mqtt_client">node_mqtt_client</a> MQTTClient module for Node.js. 
+
+<a href="http://socket.io/">Socket.IO</a>
+
+<a href="http://isotope.metafizzy.co/">Isotope</a> Javascript layout library. This requires a <a href="http://metafizzy.co/#isotope-license">license</a> if you are to use it for commercial purposes. 
+
+<a href="http://www.biwascheme.org/">BiwaScheme</a> for S-Expression parsing in Javascript and Node.js.
+
