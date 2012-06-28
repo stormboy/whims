@@ -30,7 +30,15 @@
 		This presently has binary buttons.  
 		The widgets included are determined by the file <a href="ui.json">ui.json</a>
 	</p>
-	
+	<p>	You may test the widgets are receiving messages by publishing messages to appropriate topics.
+		To update the "gate" status, for example, make sure you can see the "house" widgets, and publish a message
+		to the gate "outbound" topic. Using the mosquitto publish command:
+		<ul><code>mosquitto_pub -h 192.168.0.17 -t hs/site/smart/ui/house/gate/out/binaryOutput -m "(value true)"</code></ul>
+		where the parameter provided by <code>-h</code> is your MQTT server address.  To send the opposite signal to the gate
+		widget:
+		<ul><code>mosquitto_pub -h 192.168.0.17 -t hs/site/smart/ui/house/gate/out/binaryOutput -m "(value false)"</code></ul>
+		
+	</p>
 	<h3>S-Expressions</h3>
 	<p><a href="sexpressions.html">Test S-Expression parsing</a>
 	</p>

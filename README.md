@@ -59,6 +59,11 @@ Web interface to
  <li>navigate categories and "things"</li>
 </ul>
 
+Provide a straight WebSocket service so that clients who do not need the overhead of Socket.IO can connect. e.g. Arduinos
+Arduino WebSocket client: https://github.com/krohling/ArduinoWebsocketClient
+Or make a SocketIO client library for Arduino, based on SocketIO spec here: https://github.com/LearnBoost/socket.io-spec
+Can wrap WS client (as is done here for Android https://github.com/koush/android-websockets/blob/master/src/com/codebutler/android_websockets/SocketIOClient.java)
+
 Credits
 -------
 

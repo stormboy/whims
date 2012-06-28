@@ -11,7 +11,7 @@ $(function() {
 			name: "Button",
 			path: "",
 			inFacet: "out/binaryOutput",
-			outPath: "in/binaryInput",
+			outFacet: "in/binaryInput",
 			onSymbol: "on",
 			offSymbol: "off",
 			onText: "on",
@@ -90,7 +90,7 @@ $(function() {
 		sendValue: function( event, value ) {
 			// trigger an event, check if it's canceled
 			if ( this._trigger( "sendValue", event, value ) !== false ) {
-				var topic = this.options.path + "/" + this.options.outPath;
+				var topic = this.options.path + "/" + this.options.outFacet;
 				var message = "(value " + value + ")";
 				publish(topic, message);
 			}

@@ -151,8 +151,6 @@
 		{	"name" : "Bed3 Blinds",
 			"widget" : "BinaryButton",
 			"path" : "hs/site/smart/ui/bed3/blinds",
-			"outFacet" : "in/binaryInput",
-			"inFacet" : "out/binaryOutput",
 			"classes" : "bed3 blind",
 			"onSymbol" : "<img src='images/icons/butterfly.png'/>",
 			"offSymbol" : "<img src='images/icons/ladybug.png'/>",
@@ -177,12 +175,43 @@
 			"onText" : "lock",
 			"offText" : "unlock"
 		},
+		
+		{	"name" : "Arduino LED 1",
+			"widget" : "BinaryButton",
+			"path" : "meem/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+			"outFacet" : "in/binaryInput2",
+			"inFacet" : "out/binaryFeedback2",
+			"classes" : "house lock",
+			"onSymbol" : "<img src='images/icons/eye-watch.png'/>",
+			"offSymbol" : "<img src='images/icons/flower-windmill.png'/>",
+			"onText" : "lock",
+			"offText" : "unlock"
+		},
+		{	"name" : "Arduino LED 2",
+			"widget" : "BinaryButton",
+			"path" : "meem/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+			"outFacet" : "in/binaryInput3",
+			"inFacet" : "out/binaryFeedback3",
+			"classes" : "house light",
+			"onSymbol" : "<img src='images/icons/eye-watch.png'/>",
+			"offSymbol" : "<img src='images/icons/flower-windmill.png'/>",
+			"onText" : "lock",
+			"offText" : "unlock"
+		},
+		
 		{	"name" : "Front Feed",
 			"widget" : "VideoFeed",
 			"url" : "http://192.168.0.2/mjpg/video.mjpg?resolution=352x240",
 			"width" : 352,
 			"height" : 240,
 			"classes" : "house lock"
+		},
+		{	"name" : "Shed Feed",
+			"widget" : "VideoFeed",
+			"url" : "http://outhwaite:password@192.168.0.3/mjpg/video.mjpg?resolution=352x240",
+			"width" : 352,
+			"height" : 240,
+			"classes" : "house bed3 lock"
 		}
 	]
 }
