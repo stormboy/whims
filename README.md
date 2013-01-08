@@ -17,6 +17,7 @@ The server is implemented in Node.js and depends on a few external modules.
 ###Get Required Node.js Modules
 
     > npm install socket.io
+    > npm install mqttjs
     > npm install biwascheme
 
 ###Configure
@@ -69,8 +70,9 @@ Credits
 
 <a href="http://nodejs.org/">Node.js</a>
 
-<a href="https://github.com/yilun/node_mqtt_client">node_mqtt_client</a> MQTTClient module for Node.js. 
+<a href="https://github.com/adamvr/MQTT.js">mqttjs</a> MQTT module for Node.js.
 
+<a href="https://github.com/yilun/node_mqtt_client">node_mqtt_client</a> MQTTClient module for Node.js (no longer used). 
 <a href="http://socket.io/">Socket.IO</a> for both server and client side of web communications.
 
 <a href="http://jquery.org/">jQuery</a> and <a href="http://jqueryui.com/">jQeury UI</a>
