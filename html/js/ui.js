@@ -5,22 +5,24 @@
 // socket on the same server
 var socketUrl = "/";
 
-var pendingSubscriptions = [];
+var subscriptions = [];		// an array of MQTT topics to subscribe to
 var sessionOpened = false;
 var socket;
 
 function subscribe(topic) {
+	subscriptions.push(topic);
 	if (sessionOpened) {
 		socket.emit("subscribe", topic);
 	}
-	else {
-		pendingSubscriptions.push(topic);
-	}
+	// else {
+		// pendingSubscriptions.push(topic);
+	// }
 }
 
 function unsubscribe(topic) {
 	if (sessionOpened) {
 		// TODO make sure no other subscriptions to this topic should exist. 
+		// TODO also remove from subscriptions array
 		socket.emit("unsubscribe", topic);
 	}
 }
@@ -29,15 +31,18 @@ function publish(topic, message) {
 	if (sessionOpened) {
 		socket.emit("publish", { topic: topic, message: message });
 	}
+	// TODO perhaps cache publish events for a while until connected
 }
 
 $(document).ready(function() {
 	socket = io.connect(socketUrl);
 	
 	socket.on('connected', function (data) {
+		console.log('socket connected: ' + data);
 	});
 	
 	socket.on('disconnected', function (data) {
+		console.log('socket disconnected: ' + data);
 	});
 
 	// a handler for 
@@ -46,10 +51,9 @@ $(document).ready(function() {
 		$("#publish").show();
 		console.log('sessionOpened: ' + data);
 
-		// do pending subscriptions 
-		while (pendingSubscriptions.length > 0) {
-			var topic = pendingSubscriptions.shift();
-			socket.emit('subscribe', topic);
+		// do desired subscriptions 
+		for (var i=0; i<subscriptions.length; i++) {
+			socket.emit('subscribe', subscriptions[i]);
 		}
 	});
 	
@@ -132,6 +136,8 @@ $(document).ready(function() {
 			var widgetId = "_widget" + i;
 			$("#controls").append("<div id='" + widgetId + "' class='" + widget.classes + "'></div>");
 			
+			console.log("adding widget: " + widget.widget);
+			
 			switch (widget.widget) {
 			case "BinaryButton":
 				$( "#" + widgetId ).binaryButton({ 
@@ -153,6 +159,16 @@ $(document).ready(function() {
 					url: widget.url,
 					width: widget.width,
 					height: widget.height
+				});
+				break;
+			case "LinearIndicator":
+				$( "#" + widgetId ).linearIndicator({ 
+					name: widget.name,
+					path: widget.path,
+					unit: widget.unit,
+					symbol: widget.symbol,
+					inFacet: widget.inFacet,
+					socket: socket
 				});
 				break;
 				

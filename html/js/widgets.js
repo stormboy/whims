@@ -1,9 +1,24 @@
+function addCommas(nStr)
+{
+	nStr += '';
+	x = nStr.split('.');
+	x1 = x[0];
+	x2 = x.length > 1 ? '.' + x[1] : '';
+	var rgx = /(\d+)(\d{3})/;
+	while (rgx.test(x1)) {
+		x1 = x1.replace(rgx, '$1' + ',' + '$2');
+	}
+	return x1 + x2;
+}
 
 /**
- * A binary button widget
+ * Define widgets
  */
 $(function() {
 	
+	/**
+	 * A binary button widget
+	 */
 	// the widget definition, where "meemplex" is the namespace, "binaryButton" the widget name
 	$.widget( "meemplex.binaryButton", {
 		// default options
@@ -211,6 +226,90 @@ $(function() {
 			//this._super( "_setOption", key, value );
 		}
 	});
+	
+	
+	// the widget definition, where "meemplex" is the namespace, "linearIndicator" the widget name
+	$.widget( "meemplex.linearIndicator", {
+		// default options
+		options: {
+			name: "Indicator",
+			path: "",
+			inFacet: "out/linearOutput",
+			unit: "W",
+			socket: null,
+
+			// callbacks
+			change: null,
+		},
+
+		// the constructor
+		_create: function() {
+			this.element.addClass( "widget" ).disableSelection();	// prevent double click to select text
+			this.title     = $("<div>",  { "class": "widgetTitle", text: this.options.name }).appendTo(this.element);
+			this.linearElement = $("<div>",  { "class": "element" }).appendTo(this.element);
+			this.unit =  $("<p>",    { "class": "number", html: this.options.unit }).appendTo(this.linearElement);
+			this.symbol =  $("<h3>",   { "class": "symbol" }).appendTo(this.linearElement);
+			this.main =  $("<span>", { "class": "toggleButton", html: this.options.symbol }).appendTo(this.symbol).button();
+			this.value =    $("<h2>",   { "class": "name", text: this.options.value }).appendTo(this.linearElement);
+
+			var that = this;			
+			this.options.socket.on('message', function (data) {
+				if (data.topic == that.options.path + "/" + that.options.inFacet) {	// check if message is for this widget
+					that._acceptMessage(data.message);
+				}
+			});
+			// subscribe or defer subscribe
+			subscribe(this.options.path + "/" + this.options.inFacet);
+			
+			this._refresh();
+		},
+
+		// called when created, and later when changing options
+		_refresh: function() {
+			this.element.css( "background-color", "rgb(" +
+				this.options.red +"," +
+				this.options.green + "," +
+				this.options.blue + ")"
+			);
+
+			this._trigger( "change" );
+		},
+
+		_acceptMessage: function( message ) {
+			var value = JSON.parse(message);
+			//console.log('linear got value: ' + value.value);
+
+			if (this.value.text() != value.value) {
+				this.value.text(value.value);
+				this.linearElement.stop(true);		// cancel previous effects
+				this.linearElement.effect("shake", {direction: "up", distance: 3}, 90);
+			}
+		},
+		
+		_destroy: function() {
+			this.linearElement.remove();
+			this.element
+				.removeClass( "widget" )
+				.enableSelection()
+				.css( "background-color", "transparent" );
+		},
+
+		_setOptions: function() {
+			$.Widget.prototype._setOptions.apply( this, arguments );
+			this._refresh();
+		},
+
+		_setOption: function( key, value ) {
+			switch( key ) {
+			case "inFacet":
+				if (!value || value.length == 0) {
+					return;
+				}
+			}
+			$.Widget.prototype._setOption.call( this, key, value );
+		}
+	});
+	
 });
 
 

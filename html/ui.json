@@ -13,6 +13,10 @@
 			"class" : "blind",
 			"type" : "function"
 		},
+		{	"name" : "Energy",
+			"class" : "energy",
+			"type" : "function"
+		},
 		{	"name" : "House",
 			"class" : "house",
 			"type" : "location"
@@ -212,6 +216,30 @@
 			"width" : 352,
 			"height" : 240,
 			"classes" : "house bed3 lock"
+		},
+		{	"name" : "Power",
+			"widget" : "LinearIndicator",
+			"path" : "/power/house",
+			"inFacet" : "demand",
+			"unit" : "Watts",
+			"classes" : "house energy",
+			"symbol" : "<img src='images/icons/eye-watch.png'/>"
+		},
+		{	"name" : "Energy In",
+			"widget" : "LinearIndicator",
+			"path" : "/energy/house",
+			"inFacet" : "in",
+			"unit" : "Wh",
+			"classes" : "house energy",
+			"symbol" : "<img src='images/icons/eye-watch.png'/>"
+		},
+		{	"name" : "Energy Out",
+			"widget" : "LinearIndicator",
+			"path" : "/energy/house",
+			"inFacet" : "out",
+			"unit" : "Wh",
+			"classes" : "house energy",
+			"symbol" : "<img src='images/icons/eye-watch.png'/>"
 		}
 	]
 }

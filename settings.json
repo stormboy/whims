@@ -1,6 +1,6 @@
 {
 	"serverPort" : 8000,
-	"mqttHost" : "192.168.0.17",
+	"mqttHost" : "192.168.0.21",
 	"mqttPort" : 1883,
 	"log" : false
 }
