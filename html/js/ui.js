@@ -57,6 +57,10 @@ $(document).ready(function() {
 		}
 	});
 	
+	socket.on('sessionClosed', function (data) {		// disconnected from MQTT service
+		sessionOpened = false;
+	});
+	
 	// a handler for incoming MQTT messages
 	socket.on('message', function (data) {
 		console.log('message topic: ' + data.topic + ' message: ' + data.message);
