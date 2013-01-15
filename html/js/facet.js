@@ -79,13 +79,17 @@ function Binary(name, direction) {
 Binary.type = "org.meemplex.Binary";
 
 Binary.marshal = function(value) {
-	return '(value ' + value + ')';
+	//return '(value ' + value + ')';
+	return JSON.stringify({value: value});
 }
 
 /**
  * (value true), (value false), (value #t) or (value #f)
  */
 Binary.unmarshal = function(expression) {
+	message = JSON.parse(expression);
+	return message.value;
+/*
 	var parser = new BiwaScheme.Parser(expression);
 	var obj = parser.getObject();
 	if (BiwaScheme.isList(obj)) {
@@ -95,6 +99,7 @@ Binary.unmarshal = function(expression) {
 		}
 	}
 	return null;
+*/
 }
 
 

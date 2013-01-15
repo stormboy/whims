@@ -106,7 +106,7 @@ $(function() {
 			// trigger an event, check if it's canceled
 			if ( this._trigger( "sendValue", event, value ) !== false ) {
 				var topic = this.options.path + "/" + this.options.outFacet;
-				var message = "(value " + value + ")";
+				var message = JSON.stringify({value: value});
 				publish(topic, message);
 			}
 		},

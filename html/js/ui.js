@@ -38,18 +38,18 @@ $(document).ready(function() {
 	socket = io.connect(socketUrl);
 	
 	socket.on('connected', function (data) {
-		console.log('socket connected: ' + data);
+		console.log('socket connected: ' + data.message);
 	});
 	
 	socket.on('disconnected', function (data) {
-		console.log('socket disconnected: ' + data);
+		console.log('socket disconnected: ' + data.message);
 	});
 
 	// a handler for 
 	socket.on('sessionOpened', function (data) {		// connected to MQTT service
 		sessionOpened = true;
 		$("#publish").show();
-		console.log('sessionOpened: ' + data);
+		console.log('sessionOpened: ' + data.message);
 
 		// do desired subscriptions 
 		for (var i=0; i<subscriptions.length; i++) {

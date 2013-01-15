@@ -156,7 +156,7 @@ div#container {
 .gate       .element     { background: #0FF; background: hsl( 180, 100%, 50%); }
 .light      .element     { background: #08F; background: hsl( 216, 100%, 50%); }
 .auto-light .element     { background: #00F; background: hsl( 252, 100%, 50%); }
-.lock       .element     { background: #F0F; background: hsl( 288, 100%, 50%); }
+.security   .element     { background: #F0F; background: hsl( 288, 100%, 50%); }
 .blind      .element     { background: #F08; background: hsl( 324, 100%, 50%); }
 .disabled   .element     { background: #666; }
 
