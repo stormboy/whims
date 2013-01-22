@@ -87,8 +87,21 @@ Binary.marshal = function(value) {
  * (value true), (value false), (value #t) or (value #f)
  */
 Binary.unmarshal = function(expression) {
-	message = JSON.parse(expression);
-	return message.value;
+	if (typeof expression == "undefined" || expression == null || expression == "") {
+		return null;
+	}
+	var message = JSON.parse(expression);
+	var value;
+	if (typeof message.value == "string") {
+		value = ("true" == message.value);
+	}
+	else if (typeof message.value == "number") {
+		value = (message.value != 0);
+	}
+	else {
+		value = message.value;
+	}
+	return value;
 /*
 	var parser = new BiwaScheme.Parser(expression);
 	var obj = parser.getObject();
@@ -122,6 +135,10 @@ Linear.marshal = function(value) {
  * (value 10 Hz), (value 200 W), (value 100 C) or (value 24 sec)
  */
 Linear.unmarshal = function(expression) {
+	var message = JSON.parse(expression);
+	var value = message.value;
+	return value;
+/*
 	var parser = new BiwaScheme.Parser(expression);
 	var obj = parser.getObject();
 	if (BiwaScheme.isList(obj)) {
@@ -131,6 +148,7 @@ Linear.unmarshal = function(expression) {
 		}
 	}
 	return null;
+*/
 }
 
 

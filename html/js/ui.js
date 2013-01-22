@@ -165,6 +165,17 @@ $(document).ready(function() {
 					height: widget.height
 				});
 				break;
+			case "LinearSlider":
+				$( "#" + widgetId ).linearSlider({ 
+					name: widget.name,
+					path: widget.path,
+					unit: widget.unit,
+					symbol: widget.symbol,
+					inFacet: widget.inFacet,
+					outFacet: widget.outFacet,
+					socket: socket
+				});
+				break;
 			case "LinearIndicator":
 				$( "#" + widgetId ).linearIndicator({ 
 					name: widget.name,
