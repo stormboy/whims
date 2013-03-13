@@ -49,7 +49,7 @@ or if you are running on a different server or changed the serverPort configurat
 TODO
 ----
 
-Initial content: Keep track of last values through so that last known values are stored, and provide a request-response mechanism on MQTT for getting initial content.
+<strike>Initial content: Keep track of last values through so that last known values are stored, and provide a request-response mechanism on MQTT for getting initial content.</strike>
 
 Lifecycle: pass on health of subscribed topics. Track via last-will-and-testament of MQTT and lifecycle messages.
 
