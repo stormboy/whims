@@ -16,9 +16,7 @@ The server is implemented in Node.js and depends on a few external modules.
 
 ###Get Required Node.js Modules
 
-    > npm install socket.io
-    > npm install mqttjs
-    > npm install biwascheme
+    > npm install
 
 ###Configure
 
@@ -30,7 +28,13 @@ In the future, the widgets displayed will be determined by a "hyperspace categor
 
 ###Run
 
+Make sure an MQTT server is running on localhost, or where mqttHost is set in settings.json.
+
 Type the following in the root of the project
+
+    > npm start
+
+or
 
     > node whims.js
 
@@ -78,7 +82,5 @@ Credits
 <a href="http://jquery.org/">jQuery</a> and <a href="http://jqueryui.com/">jQeury UI</a>
 
 <a href="http://isotope.metafizzy.co/">Isotope</a> for dynamic Javascript layout. This requires a <a href="http://metafizzy.co/#isotope-license">license</a> if you are to use it for commercial purposes. 
-
-<a href="http://www.biwascheme.org/">BiwaScheme</a> for S-Expression parsing in Javascript and Node.js.
 
 <a href="http://www.simplefly.nl/icons">Simplefly</a> for icons on the demonstration UI.
