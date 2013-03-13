@@ -4,7 +4,14 @@ Web Hyperspace Interface via MQTT over Socket.IO (WHIMS)
 This project provides a web interface a MQTT service.
 A browser or other Socket.IO client communicates to a MQTT server over standard HTTP/1.1 protocols. 
 The topic structure, messages and payload format are specified in the Meemplex specifications (to be announced). 
-S-Expressions are used as payload format.
+
+For now, JSON is used as payload format.
+e.g.
+    {
+        "value" : 23,
+        "unit" : "W",
+        "timestamp" : "2013-09-12 12:30:00Z"
+    }
 
 The intention is that this can provide a gateway for "things" (e.g. devices, browsers, servers) to communicate with other things over standard web protocols.
 This services provides the ability to add a layer of security to things communicating with the MQTT server.
@@ -49,8 +56,6 @@ or if you are running on a different server or changed the serverPort configurat
 TODO
 ----
 
-<strike>Initial content: Keep track of last values through so that last known values are stored, and provide a request-response mechanism on MQTT for getting initial content.</strike>
-
 Lifecycle: pass on health of subscribed topics. Track via last-will-and-testament of MQTT and lifecycle messages.
 
 Hyperspace: maintain a hierarchy of categories corresdonding to topics
@@ -77,6 +82,7 @@ Credits
 <a href="https://github.com/adamvr/MQTT.js">mqttjs</a> MQTT module for Node.js.
 
 <a href="https://github.com/yilun/node_mqtt_client">node_mqtt_client</a> MQTTClient module for Node.js (no longer used). 
+
 <a href="http://socket.io/">Socket.IO</a> for both server and client side of web communications.
 
 <a href="http://jquery.org/">jQuery</a> and <a href="http://jqueryui.com/">jQeury UI</a>
