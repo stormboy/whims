@@ -5,15 +5,39 @@
  * Author: Warren Bloomer
  */
 
-var config = require('./settings')						// get settings
-	, http = require("./lib/http")						// get server handlers
-	, server = require('http').createServer(http.requestHandler)	// create http server with http handler
-	, whims = require('./lib/whims')
-	, events = require('events')
+config = require('./settings')			// get settings
+whims = require('./lib/whims')
+express = require('express')
+http = require('http')
+path = require('path')
+
+var app = express();
+
+app.configure(function() {
+  app.set('port', config.serverPort || 3000);
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'jade');
+  app.engine('jade', require('jade').__express);
+  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(require('stylus').middleware(__dirname + '/public'));
+  app.use(app.router);
+});
+
+app.configure('production', function() {
+  app.set('view cache', true);
+});
+
+app.configure('development', function() {
+  app.use(express.errorHandler());
+  app.locals.pretty = true;
+});
+
 
 // HTTP server listens on configured port.
-var serverPort = config.serverPort || 80;		// port for running the HTTP server.
-server.listen(serverPort);
+var server = http.createServer(app);
+server.listen(app.get('port'), function(){
+	console.log("Whims server listening on port " + app.get('port'));
+});
 
 // create whims service (MQTT over socket.io)
 var options = { mqttHost: config.mqttHost, mqttPort: config.mqttPort, log : config.log };
