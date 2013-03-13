@@ -8,9 +8,9 @@ The topic structure, messages and payload format are specified in the Meemplex s
 For now, JSON is used as payload format.
 e.g.
     {
-        "value" : 23,
+        "value" : 2398,
         "unit" : "W",
-        "timestamp" : "2013-09-12 12:30:00Z"
+        "timestamp" : "2013-09-13T13:49:39.000Z"
     }
 
 The intention is that this can provide a gateway for "things" (e.g. devices, browsers, servers) to communicate with other things over standard web protocols.

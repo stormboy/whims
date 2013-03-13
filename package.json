@@ -1,8 +1,7 @@
 {
   "name": "whims",
   "version": "0.0.1",
-  "private": true,
-  "main" : "whims.js",
+  "main": "whims.js",
   "scripts": {
     "start": "node whims"
   },
