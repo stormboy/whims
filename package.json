@@ -10,7 +10,8 @@
     "jade": "*",
     "stylus": "*",
     "socket.io": "*",
-    "mqttjs": "*"
+    "mqttjs": "*",
+    "browserify-middleware": "*"
   }
 }
 

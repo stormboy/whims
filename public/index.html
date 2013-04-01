@@ -1,48 +1,43 @@
 <html>
 <head>
-	<title>Whims</title>
-	<link type="text/css" rel="stylesheet" href="css/meemplex_touch.css" />
+    <title>Meemplex Control</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="image/png" href="/images/icons/light-bulb.png" />
+    <link rel="apple-touch-icon" href="images/majitek.jpg"/>
+    
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=0.6, maximum-scale=1.0, minimum-scale=0.5, user-scalable=no">
+    
+    <link type="text/css" rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.2.custom.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/meemplex_touch.css" />
+    <link type="text/css" rel="stylesheet" href="css/isotope.css" />
+
+	<script src="js/jquery-1.9.1.min.js"></script>
+	<script src="js/jquery-ui-1.10.2.custom.min.js"></script>
+	<script src="js/jquery.isotope.min.js"></script>
+	<script src="js/d3.v3.js"></script>
+	<script src="socket.io/socket.io.js"></script>
+	<script src="js/widgets.js"></script>
+	<script src="js/bundle.js"></script>	
+	<script src="js/iscroll.js"></script>
 </head>
 <body>
-	<h1>Whims</h1>
-	<h2>A Web Hyperspace Interface via MQTT over Socket.IO</h2>
+	<div id="mainContainer">
+		<h1 id="title">MQTT UI</h1>
+		<div id="controlsContainer" class="scroll">
+			<div id="controls" class="clearfix isotope fitRows">
+			</div>
+		</div>
+		<div id="selectorContainer">
+			<div id="classSelectors">
+			</div>
+		</div>
+	</div>
 	
-	<p>	This project provides a web interface a MQTT service.  A browser or other <a href="http://socket.io/">Socket.IO</a> client
-		communicates to a MQTT server over standard HTTP/1.1 protocols.
-		The topic structure and payload are specified in the Meemplex specifications (to be announced).
-		S-Expressions are used as payload format.
-	</p>	
-	<p>	The intention is that this can provide a gateway for "things" (e.g. devices, browsers, servers) 
-		to communicate with other things over standard web protocols.  
-		This services provides the ability to add a layer of 
-		security to things communicating with the MQTT server.
-	</p>
-	<p>	The server is implemented in Node.js and may be run with
-		<ul><code>&gt; node whims.js</code></ul>
-	</p>
-	
-	<h3>MQTT PubSub</h3>
-	<p>	The <a href="mqtt.html">MQTT PubSub test page</a> allows you to subcribe and publish to MQTT topics
-		on the configured MQTT server.  The MQTT server details are specified in the settings.json file in 
-		the project root.
-	</p>
-	
-	<h3>Automation Interface</h3>
-	<p>	A <a href="touch.html">touch-oriented web UI</a> for interacting with things.
-		This presently has binary buttons.  
-		The widgets included are determined by the file <a href="ui.json">ui.json</a>
-	</p>
-	<p>	You may test the widgets are receiving messages by publishing messages to appropriate topics.
-		To update the "gate" status, for example, make sure you can see the "house" widgets, and publish a message
-		to the gate "outbound" topic. Using the mosquitto publish command:
-		<ul><code>mosquitto_pub -h 192.168.0.17 -t hs/site/smart/ui/house/gate/out/binaryOutput -m "(value true)"</code></ul>
-		where the parameter provided by <code>-h</code> is your MQTT server address.  To send the opposite signal to the gate
-		widget:
-		<ul><code>mosquitto_pub -h 192.168.0.17 -t hs/site/smart/ui/house/gate/out/binaryOutput -m "(value false)"</code></ul>
-		
-	</p>
-	<h3>S-Expressions</h3>
-	<p><a href="sexpressions.html">Test S-Expression parsing</a>
-	</p>
+	<script type="text/javascript">
+		var controlsScroll = new iScroll('controlsContainer', { bounce: false });
+		var selectorScroll = new iScroll('selectorContainer', { bounce: false, hScrollbar: false, vScrollbar: false });
+	</script>
 </body>
-</html>

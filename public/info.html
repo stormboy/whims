@@ -1,0 +1,48 @@
+<html>
+<head>
+	<title>Whims</title>
+	<link type="text/css" rel="stylesheet" href="css/meemplex_touch.css" />
+</head>
+<body>
+	<h1>Whims</h1>
+	<h2>A Web Hyperspace Interface via MQTT over Socket.IO</h2>
+	
+	<p>	This project provides a web interface a MQTT service.  A browser or other <a href="http://socket.io/">Socket.IO</a> client
+		communicates to a MQTT server over standard HTTP/1.1 protocols.
+		The topic structure and payload are specified in the Meemplex specifications (to be announced).
+		S-Expressions are used as payload format.
+	</p>	
+	<p>	The intention is that this can provide a gateway for "things" (e.g. devices, browsers, servers) 
+		to communicate with other things over standard web protocols.  
+		This services provides the ability to add a layer of 
+		security to things communicating with the MQTT server.
+	</p>
+	<p>	The server is implemented in Node.js and may be run with
+		<ul><code>&gt; node whims.js</code></ul>
+	</p>
+	
+	<h3>MQTT PubSub</h3>
+	<p>	The <a href="mqtt.html">MQTT PubSub test page</a> allows you to subcribe and publish to MQTT topics
+		on the configured MQTT server.  The MQTT server details are specified in the settings.json file in 
+		the project root.
+	</p>
+	
+	<h3>Automation Interface</h3>
+	<p>	A <a href="touch.html">touch-oriented web UI</a> for interacting with things.
+		This presently has binary buttons.  
+		The widgets included are determined by the file <a href="ui.json">ui.json</a>
+	</p>
+	<p>	You may test the widgets are receiving messages by publishing messages to appropriate topics.
+		To update the "gate" status, for example, make sure you can see the "house" widgets, and publish a message
+		to the gate "outbound" topic. Using the mosquitto publish command:
+		<ul><code>mosquitto_pub -h 192.168.0.17 -t hs/site/smart/ui/house/gate/out/binaryOutput -m "(value true)"</code></ul>
+		where the parameter provided by <code>-h</code> is your MQTT server address.  To send the opposite signal to the gate
+		widget:
+		<ul><code>mosquitto_pub -h 192.168.0.17 -t hs/site/smart/ui/house/gate/out/binaryOutput -m "(value false)"</code></ul>
+		
+	</p>
+	<h3>S-Expressions</h3>
+	<p><a href="sexpressions.html">Test S-Expression parsing</a>
+	</p>
+</body>
+</html>

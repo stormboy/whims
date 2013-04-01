@@ -1,0 +1,37 @@
+<html>
+<head>
+	<script src="../js/jquery-1.9.1.min.js"></script>
+	<script src="../js/transform.js"></script>
+	<script src="../js/knobKnob.jquery.js"></script>
+	<script src="../js/knob_script.js"></script>
+    <link type="text/css" rel="stylesheet" href="../css/knob_styles.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/knobKnob.css"/>
+
+</head>
+<body>
+	
+	<div id="bars">
+			<div id="control"></div>
+	</div>
+
+
+	<div id="elem"></div>
+	
+<script>
+	$('#elem').knobKnob({
+	    snap : 10,          // Snap to zero if less than this deg.
+	    value: 154,         // Default rotation
+	    turn : function(ratio){
+	        // Do what you want here. Ratio moves from 0 to 1
+	        // relative to the knob rotation. 0 - off, 1 - max
+	        console.log("knob value: " + ratio);
+	    }
+	});
+
+	setTimeout(function() {
+		$("#control").update(50);
+		$("#elem").update(240);
+	}, 2000);
+</script>
+</body>
+</html>

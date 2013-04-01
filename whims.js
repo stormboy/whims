@@ -10,6 +10,7 @@ whims = require('./lib/whims')
 express = require('express')
 http = require('http')
 path = require('path')
+browserify = require('browserify-middleware')
 
 var app = express();
 
@@ -32,6 +33,13 @@ app.configure('development', function() {
   app.locals.pretty = true;
 });
 
+app.get('/js/bundle.js', browserify('./lib/client/bundle.js'));
+
+var touch = require('./routes/touch');
+app.get('/touch', touch.show);
+
+var chart = require('./routes/chart');
+app.get('/chart', chart.line);
 
 // HTTP server listens on configured port.
 var server = http.createServer(app);
@@ -40,7 +48,12 @@ server.listen(app.get('port'), function(){
 });
 
 // create whims service (MQTT over socket.io)
-var options = { mqttHost: config.mqttHost, mqttPort: config.mqttPort, log : config.log };
+var options = { 
+	mqttHost: config.mqttHost, 
+	mqttPort: config.mqttPort, 
+	log : config.log 
+};
+console.log("options: " + JSON.stringify(options));
 whims.listen(server, options);
 
 // catch uncaught exceptions

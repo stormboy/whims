@@ -324,6 +324,15 @@
 			"unit" : "dB",
 			"classes" : "_house",
 			"symbol" : "<img src='images/icons/eye-watch.png'/>"
+		},
+		{	"name" : "Power",
+			"widget" : "DataChart",
+			"path" : "/house/meter/power",
+			"inFacet" : "demand",
+			"unit" : "Watts",
+			"classes" : "house energy",
+			"symbol" : "<img src='images/icons/eye-watch.png'/>"
 		}
+
 	]
 }

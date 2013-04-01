@@ -2,6 +2,7 @@ html,body {
 	margin:0;
 	padding:0;
 	height:100%;
+	overflow: hidden;
 	
 	font-family:arial,sans-serif;
 	font-size:small;
@@ -98,17 +99,17 @@ div#container {
 
 }
 
-.widgetTitle {
+.widgetTitle, legend, label {
+	color: #CCC;
+	text-shadow: none;
 	font-size: 16px;
-	font-weight: bold;
 	margin: 5px 5px 0 5px;
 }
 
 .pushButton {
-	background-color: #CCCCCC;
+	background-color: #CCC;
 	height: 50px;
 	width: 50px;
-	line-height: 
 }
 
 .element .ui-button-text {
@@ -133,9 +134,9 @@ div#container {
 
 #controlsContainer {
 	position: absolute;
-        top: 0;
+	top: 0px;
 	width: 100%;
-	bottom: 130px;
+	bottom: 85px;
 	overflow: scroll;
 	background-color: #000000;
 }
@@ -147,7 +148,7 @@ div#container {
 
 #selectorContainer {
 	position: fixed;
-	bottom: 0;
+	bottom: 0px;
 	width: 100%;
 	padding: 10px;
 	background-color: #333333;
@@ -156,12 +157,19 @@ div#container {
 }
 
 #classSelectors {
-	height: 110px;
+	height: 85px;
 	max-width: 1200px;
-	width: 1200px;
-/*
-*/
+	width: 1000px;
 }
+
+#locationSelectors {
+	float: left;
+	margin-left: 30px;
+}
+#functionSelectors {
+	float: left;
+}
+
 #classSelectors button {
 	font-size: 20px;
 	width: 110px;
@@ -699,7 +707,7 @@ h3#options {
 .option-def dl dt,
 .option-def dl dd {
   float: left;
-  padding: 0 1.2em;;
+  padding: 0 1.2em;
   background: #161616;
   line-height: 36px;
   height: 36px;
@@ -883,7 +891,7 @@ code .nd { color: #9FAD7E; } /* CSS pseudo selector */
   font-size: 28px;
   line-height: 1.4em;
   list-style: none;
-  margin-left: 0;
+  margin-left: 0px;
 }
 
 
@@ -913,3 +921,28 @@ code .nd { color: #9FAD7E; } /* CSS pseudo selector */
 /* fix clearfix: blueprintcss.lighthouseapp.com/projects/15318/tickets/5-extra-margin-padding-bottom-of-page */
 .clearfix { zoom: 1; }
 
+
+.ui-slider {
+	width: 300px;
+}
+
+/* for the line chart */
+
+.chart {
+	background-color: #FFF;
+}
+
+.chart .axis path,
+.chart .axis line {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}
+.chart .x.axis path {
+	display: none;
+}
+.chart .line {
+	fill: none;
+	stroke: steelblue;
+	stroke-width: 1.5px;
+}
