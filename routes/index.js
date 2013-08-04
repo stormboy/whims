@@ -3,9 +3,10 @@ var chart = require('./chart');
 var browserify = require('browserify-middleware')
 
 exports.init = function(app) {
+	app.get('/',      touch.show);
 	app.get('/touch', touch.show);
 	app.get('/chart', chart.line);
-	app.get('/js/bundle.js', browserify('../lib/client/bundle.js'));
+	//app.get('/js/bundle.js', browserify('../lib/client/bundle.js'));
 }
 
 exports.error = function(err, req, res, next) {

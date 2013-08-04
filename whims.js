@@ -5,13 +5,14 @@
  * Author: Warren Bloomer
  */
 
-var config = require('./settings')			// get settings
-var whims = require('./lib/whims')
+var config  = require('./settings')			// get settings
+var whims   = require('./lib/whims')
 var express = require('express')
-var http = require('http')
-var path = require('path')
-var routes = require('./routes');
+var http    = require('http')
+var path    = require('path')
+var routes  = require('./routes');
 
+// create the expressjs app
 var app = express();
 
 app.locals.basepath = config.basePath || "";  // set basepath variable
