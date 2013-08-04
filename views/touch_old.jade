@@ -11,21 +11,31 @@ html(lang="en")
     meta(name="apple-touch-fullscreen", content="yes")
     meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0.5, user-scalable=no")
 
-    link(type="text/css", rel="stylesheet", href="css/bootstrap.min.css")
+    link(type="text/css", rel="stylesheet", href="css/ui-lightness/jquery-ui-1.10.2.custom.min.css")
+    link(type="text/css", rel="stylesheet", href="css/jquery.mobile-1.3.0.min.css")
     link(type="text/css", rel="stylesheet", href="css/meemplex_touch.css")
     link(type="text/css", rel="stylesheet", href="css/isotope.css")
     
-    script(data-main="js/main", src="js/lib/require.js")
+    //- script(data-main="javascripts/main", src="javascripts/lib/require.js")
+    
+    script(src="js/lib/jquery-1.9.1.min.js")
+    script(src="js/lib/jquery-ui-1.10.2.custom.min.js")
+    script(src="js/lib/jquery.mobile-1.3.0.min.js")
+    script(src="js/lib/jquery.isotope.min.js")
+    script(src="js/lib/d3.v3.js")
+    script(src="socket.io/socket.io.js")
+    script(src="js/lib/iscroll.js")
+    script(src="js/lib/widgets.js")
+    script(src="js/bundle.js")
 
   body
     #mainContainer
       h1#title MQTT UI
       #controlsContainer
         #controls.clearfix.isotope.fitRows
-        //- #controls
       #selectorContainer
         #classSelectors
-          #functionSelectors.btn-group
+          #functionSelectors(data-role="controlgroup", data-type="horizontal")
             legend Function
-          #locationSelectors.btn-group
+          #locationSelectors(data-role="controlgroup", data-type="horizontal")
             legend Location

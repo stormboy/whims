@@ -5,23 +5,33 @@
  * Author: Warren Bloomer
  */
 
-config = require('./settings')			// get settings
-whims = require('./lib/whims')
-express = require('express')
-http = require('http')
-path = require('path')
-browserify = require('browserify-middleware')
+var config = require('./settings')			// get settings
+var whims = require('./lib/whims')
+var express = require('express')
+var http = require('http')
+var path = require('path')
+var routes = require('./routes');
 
 var app = express();
 
-app.configure(function() {
-  app.set('port', config.serverPort || 3000);
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
-  app.engine('jade', require('jade').__express);
-  app.use(express.static(path.join(__dirname, 'public')));
-  app.use(require('stylus').middleware(__dirname + '/public'));
-  app.use(app.router);
+app.locals.basepath = config.basePath || "";  // set basepath variable
+
+app.set('port', config.serverPort || 3000);
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
+app.engine('jade', require('jade').__express);
+  
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(require('stylus').middleware(__dirname + '/public'));
+app.use(function(req,res,next){							// put request path in req.locals for access by views
+    res.locals.path = req.path; // put path in req
+    next();
+});
+app.use(app.router);
+app.use(routes.error);									// error catch-all
+app.use(function(req,res){								// if we get to this point, resource is not found
+	res.status(404);
+    res.render('errors/404.jade');
 });
 
 app.configure('production', function() {
@@ -33,13 +43,7 @@ app.configure('development', function() {
   app.locals.pretty = true;
 });
 
-app.get('/js/bundle.js', browserify('./lib/client/bundle.js'));
-
-var touch = require('./routes/touch');
-app.get('/touch', touch.show);
-
-var chart = require('./routes/chart');
-app.get('/chart', chart.line);
+routes.init(app);
 
 // HTTP server listens on configured port.
 var server = http.createServer(app);
@@ -54,6 +58,7 @@ var options = {
 	log : config.log 
 };
 console.log("options: " + JSON.stringify(options));
+
 whims.listen(server, options);
 
 // catch uncaught exceptions

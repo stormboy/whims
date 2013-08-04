@@ -4,3 +4,9 @@ exports.show = function(req, res) {
 		title : "Touch Interface",
 	});
 }
+
+exports.showOld = function(req, res) {
+	res.render('touch_old', {
+		title : "Touch Interface",
+	});
+}

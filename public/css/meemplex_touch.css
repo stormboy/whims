@@ -171,9 +171,12 @@ div#container {
 }
 
 #classSelectors button {
+	/*
 	font-size: 20px;
 	width: 110px;
 	height: 110px;
+	*/
+	/*
 	margin: 2px;
 	text-shadow: 0 1px hsla( 0, 0%, 100%, 0.5 );
 	background-image: -webkit-linear-gradient( top, hsla( 0, 0%, 100%, 0.5 ), hsla( 0, 0%, 100%, 0.0 ) );
@@ -184,14 +187,17 @@ div#container {
   -webkit-border-radius: 1.2em;
       -moz-border-radius: 1.2em;
           border-radius: 1.2em;
+    */
 }
 
 #classSelectors .function {
 	background-color: #999;
+	color: #EEE;
 }
 
 #classSelectors .location {
-	background-color: white;
+	background-color: #FFF;
+	color: #333;
 }
 
 /* the different widget classes */

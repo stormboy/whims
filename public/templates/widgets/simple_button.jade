@@ -1,0 +1,12 @@
+div(id='#{id}', class='widget #{classes}')
+	.widgetTitle= name
+	.element#offElement
+		p.number
+		h3.symbol#offSymbol
+			span.toggleButton!= offSymbol
+		h2.name= offText
+	.element#onElement
+		p.number
+		h3.symbol#onSymbol
+			span.toggleButton!= onSymbol
+		h2.name= onText

@@ -47,6 +47,8 @@
 		{	"name" : "All Lights",
 			"widget" : "BinaryButton",
 			"path" : "hs/site/smart/ui/house/lights",
+			"inFacet" : "out/binaryOutput",
+			"outFacet" : "in/binaryInput",
 			"classes" : "house light",
 			"onSymbol" : "<img src='images/icons/light-bulb.png'/>",
 			"offSymbol" : "<img src='images/icons/flower.png'/>",
@@ -329,6 +331,8 @@
 			"widget" : "DataChart",
 			"path" : "/house/meter/power",
 			"inFacet" : "demand",
+			"queryPath" : "/data/log",
+			"responsePath": "/response/house/meter/power",
 			"unit" : "Watts",
 			"classes" : "house energy",
 			"symbol" : "<img src='images/icons/eye-watch.png'/>"

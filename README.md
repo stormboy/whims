@@ -1,5 +1,6 @@
-Web Hyperspace Interface via MQTT over Socket.IO (WHIMS)
-================================================
+WHIMS
+=====
+###(Web Hyperspace Interface via MQTT over Socket.IO)
 
 This project provides a web interface a MQTT service.
 A browser or other Socket.IO client communicates to a MQTT server over standard HTTP/1.1 protocols. 
@@ -72,6 +73,8 @@ Hyperspace: maintain a hierarchy of categories corresdonding to topics
 
 Security: subscribe and publish to only those topics that are allowed to the client.
 
+Storage: for editing and storing widgets for devices of interest.
+ 
 Web interface to
 <ul>
  <li>navigate categories and "things"</li>

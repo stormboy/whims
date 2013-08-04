@@ -1,0 +1,24 @@
+doctype 5
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    if locals.title
+      title Whims | #{title}
+    else
+      title Whims
+    link(rel="shortcut icon", type="image/png", href="/images/icons/light-bulb.png")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="description", content="Whims")
+    meta(name="author", content="Stormboy")
+    
+    //- link(href="#{basepath}/stylesheets/bootstrap.min.css", rel="stylesheet")
+    //- link(href="#{basepath}/stylesheets/style.css", rel="stylesheet")
+    
+    block scripts
+      script(src="#{basepath}/js/lib/jquery-1.9.1.min.js")
+
+  body
+    .container
+      block content
+      
+
