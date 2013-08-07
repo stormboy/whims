@@ -3,7 +3,8 @@
   "version": "0.0.2",
   "main": "whims.js",
   "scripts": {
-    "start": "node whims"
+    "start": "node whims",
+    "preinstall": "./node_modules/requirejs/bin/r.js -o app.build.js"
   },
   "dependencies": {
     "express": "3.2.x",
