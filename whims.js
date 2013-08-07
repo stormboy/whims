@@ -11,6 +11,7 @@ var express = require('express')
 var http    = require('http')
 var path    = require('path')
 var routes  = require('./routes');
+var stylus  = require("stylus");
 
 // create the expressjs app
 var app = express();
@@ -21,9 +22,21 @@ app.set('port', config.serverPort || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.engine('jade', require('jade').__express);
-  
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(require('stylus').middleware(__dirname + '/public'));
+
+app.configure('production', function() {
+	var staticPath = "public-build";
+	app.use(express.static(path.join(__dirname, staticPath)));
+	app.set('view cache', true);
+});
+
+app.configure('development', function() {
+	var staticPath = "public";
+	app.use(express.static(path.join(__dirname, staticPath)));
+	app.use(stylus.middleware(path.join(__dirname, staticPath)));
+	app.use(express.errorHandler());
+	app.locals.pretty = true;
+});
+
 app.use(function(req,res,next){							// put request path in req.locals for access by views
     res.locals.path = req.path; // put path in req
     next();
@@ -33,15 +46,6 @@ app.use(routes.error);									// error catch-all
 app.use(function(req,res){								// if we get to this point, resource is not found
 	res.status(404);
     res.render('errors/404.jade');
-});
-
-app.configure('production', function() {
-  app.set('view cache', true);
-});
-
-app.configure('development', function() {
-  app.use(express.errorHandler());
-  app.locals.pretty = true;
 });
 
 routes.init(app);
