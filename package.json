@@ -11,6 +11,10 @@
     "stylus": "*",
     "socket.io": "*",
     "mqtt": "*"
+  },
+  "repository" : { 
+    "type" : "git",
+    "url" : "https://github.com/stormboy/whims.git"
   }
 }
 
