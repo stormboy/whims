@@ -41,6 +41,8 @@ function($, Router, Util, EventEmitter, SockJS) {
 			if (TRACE) {
 				console.log('socket disconnected');
 			}
+			alert("comms closed");
+			// TODO implement reconnect logic
 		};
 
 		this.socket.onmessage = function (message) {
@@ -84,7 +86,7 @@ function($, Router, Util, EventEmitter, SockJS) {
 					
 				default:
 					// unhandled message
-					console.log("unhandled message: " + message.type);
+					//console.log("unhandled message: " + message.type);
 			}
 		};
 
