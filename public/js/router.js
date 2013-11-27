@@ -8,6 +8,8 @@ define([ 'jquery',
          'views/home', ], 
 function($, _, Backbone, MeemBus, UI, iScroll, HomeView) {
 	var TRACE = false;
+	var title = "My Home";
+	
 	var controlPanel;
 	
 	var AppRouter = Backbone.Router.extend({
@@ -19,31 +21,16 @@ function($, _, Backbone, MeemBus, UI, iScroll, HomeView) {
 		},
 
 		showHome : function() {
-			if (TRACE) {
-				console.log("showing home");
-			}
-			//$('#mainContainer').append(this.homeView.$el);
-			setTimeout(function() {
-				controlPanel.filterWidgets(".house");
-			}, 100);
+			controlPanel.filterWidgets(".house");
+			$("#title").text(title);
 		},
 		showFunction : function(fn) {
-			if (TRACE) {
-				console.log("showing function: " + fn);
-			}
-			//$('#mainContainer').append(this.homeView.$el);
-			setTimeout(function() {
-				controlPanel.filterWidgets("."+fn);
-			}, 100);
+			controlPanel.filterWidgets("."+fn);
+			$("#title").text(title + " | "  + fn);
 		},
 		showLocation : function(loc) {
-			if (TRACE) {
-				console.log("showing location: " + loc);
-			}
-			//$('#mainContainer').append(this.homeView.$el);
-			setTimeout(function() {
-				controlPanel.filterWidgets("."+loc);
-			}, 100);
+			controlPanel.filterWidgets("."+loc);
+			$("#title").text(title  + " | " + loc);
 		},
 
 		//homeView : new HomeView(),

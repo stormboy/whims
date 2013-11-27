@@ -281,6 +281,10 @@ div#container {
 	color: #333;
 }
 
+#title {
+	text-align: left;
+}
+
 /* the different widget classes */
 .security   .element     { background: #F00; background: hsl(   0, 100%, 60%); }
 .light      .element     { background: #F80; background: hsl(  36, 100%, 65%); }

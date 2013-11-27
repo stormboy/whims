@@ -43,7 +43,9 @@ function($, Router, Widgets, Util, EventEmitter) {
 	
 		// display a filtered set of widgets as per selector
 		this.filterWidgets = function(selector) {
-			self.controlsElement.isotope( { filter : selector } );
+			setTimeout(function() {
+				self.controlsElement.isotope( { filter : selector } );
+			}, 50);
 		};
 	};
 	Util.inherits(ControlPanel, EventEmitter);
