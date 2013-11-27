@@ -12,20 +12,6 @@ define([
     ], 
 function($, Router, Widgets, Util, EventEmitter) {
 
-	/*
-	<div id="mainContainer">
-		<h1 id="title">MQTT UI</h1>
-		<div id="controlsContainer">
-			<div id="controls" class="clearfix isotope fitRows">
-			</div>
-		</div>
-		<div id="selectorContainer">
-			<div id="classSelectors">
-			</div>
-		</div>
-	</div>
-	 */
-	
 	/**
 	 * Example:
 	 * new ControlPanel(meemBus, $("#title"), $("#controls"), $("#classSelectors"));
@@ -160,7 +146,9 @@ function($, Router, Widgets, Util, EventEmitter) {
 			this.addWidget(widgetId, widget);
 		}
 	
-		console.log("laying out with isotope");
+		if (TRACE) {
+			console.log("laying out with isotope");
+		}
 		
 		// initiate isotope layout on the #controls element
 		this.controlsElement.isotope({
@@ -192,7 +180,10 @@ function($, Router, Widgets, Util, EventEmitter) {
 	ControlPanel.prototype.addWidget = function(widgetId, widget) {
 		var self = this;
 		
-		//this.controlsElement.append("<div id='" + widgetId + "' class='" + widget.classes + "'></div>");
+		if (self.updateTimeout) {
+			// clear re-layout timer
+			clearTimeout(self.updateTimeout);
+		}
 		
 		if (TRACE) {
 			console.log("adding widget: " + widget.widget);
@@ -218,14 +209,6 @@ function($, Router, Widgets, Util, EventEmitter) {
 			this.controlsElement.append(view.$el);
 			break;
 
-//			$( "#" + widgetId ).videoFeed({
-//				name: widget.name,
-//				url: widget.url,
-//				width: widget.width,
-//				height: widget.height
-//			});
-//			break;
-
 		case "LinearSlider":
 			widget.id = widgetId;
 			var view = new Widgets.LinearSlider({
@@ -234,17 +217,6 @@ function($, Router, Widgets, Util, EventEmitter) {
 			});
 			this.controlsElement.append(view.$el);
 			break;
-
-//			$( "#" + widgetId ).linearSlider2({ 
-//				name: widget.name,
-//				path: widget.path,
-//				unit: widget.unit,
-//				symbol: widget.symbol,
-//				inFacet: widget.inFacet,
-//				outFacet: widget.outFacet,
-//				meemBus: self.meemBus
-//			});
-//			break;
 
 		case "LinearIndicator":
 			widget.id = widgetId;
@@ -266,6 +238,16 @@ function($, Router, Widgets, Util, EventEmitter) {
 			
 		// TODO more widget types
 		}
+		
+		// relayout isotope container
+		self.updateTimeout = setTimeout(function() {
+			console.log("updating controls panel");
+			self.controlsElement.isotope({
+				layoutMode : 'fitRows'
+			});
+			self.updateTimeout = null;
+		}, 100);
+	
 	};
 	
 	return {
