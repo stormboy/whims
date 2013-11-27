@@ -27,7 +27,7 @@ function($, Backbone, MeemBus, UI, iScroll, HomeTemplate) {
 			});
 			window.onresize = function() {
 				$(document.body).width(window.innerWidth).height(window.innerHeight);
-			}
+			};
 			$(function() {
 				window.onresize();
 			});

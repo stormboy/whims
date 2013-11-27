@@ -31,7 +31,7 @@ function($, Router, Widgets, Util, EventEmitter) {
 	 * new ControlPanel(meemBus, $("#title"), $("#controls"), $("#classSelectors"));
 	 */
 	
-	var TRACE = true;
+	var TRACE = false;
 	
 	/**
 	 * titleElement: jQuery wrapped element
@@ -58,8 +58,8 @@ function($, Router, Widgets, Util, EventEmitter) {
 		// display a filtered set of widgets as per selector
 		this.filterWidgets = function(selector) {
 			self.controlsElement.isotope( { filter : selector } );
-		}
-	}
+		};
+	};
 	Util.inherits(ControlPanel, EventEmitter);
 		
 		
@@ -80,7 +80,7 @@ function($, Router, Widgets, Util, EventEmitter) {
 				this.filterWidgets(this.functionFilter + this.locationFilter);
 			}
 		}
-	}
+	};
 		
 	/*
 	 * get UI configuration data 
@@ -96,7 +96,7 @@ function($, Router, Widgets, Util, EventEmitter) {
 			}
 			self.uiData(data);
 		});
-	}
+	};
 	
 	/**
 	 * Build UI from the descriptor
@@ -181,7 +181,7 @@ function($, Router, Widgets, Util, EventEmitter) {
 		});
 	
 		this.filterWidgets(".house");	// initial controls filter
-	}
+	};
 	
 	/**
 	 * Add a widget to the controls panel.
@@ -266,9 +266,9 @@ function($, Router, Widgets, Util, EventEmitter) {
 			
 		// TODO more widget types
 		}
-	}
+	};
 	
 	return {
 		ControlPanel: ControlPanel
-	}
+	};
 });
