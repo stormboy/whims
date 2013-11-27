@@ -26,6 +26,7 @@ function($, Router, Util, EventEmitter, SockJS) {
 		
 		this.subscriptions = {};		// a hash of MQTT topics to subscribe to mapped to the number of client subscriptions requested
 		this.sessionOpened = false;
+		console.log("creating new socket");
 		this.socket = new SockJS(this.socketUrl);
 		
 		var self = this;
@@ -76,11 +77,7 @@ function($, Router, Util, EventEmitter, SockJS) {
 				case 'message': 				// handle incoming MQTT message
 					var data = message.data || {};
 					if (TRACE) {
-						console.log('message: ' + message);
-						for (d in message.data) {
-							console.log("d: " + d + " : " + message.data[d]);
-						}
-						console.log('message topic: ' + data.topic + ' message: ' + data.message);
+						//console.log('message topic: ' + data.topic + ' message: ' + data.message);
 					}
 					self.emit(data.topic, data.message);
 					break;
@@ -157,6 +154,13 @@ function($, Router, Util, EventEmitter, SockJS) {
 			}));
 		}
 		// TODO perhaps cache publish events for a while until connected
+	};
+	
+	MeemBus.prototype.close = function() {
+		if (this.socket) {
+			this.socket.close();
+			this.socket = null;
+		}
 	};
 	
 	return MeemBus;
