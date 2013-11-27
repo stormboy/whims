@@ -3,11 +3,86 @@ html,body {
 	padding:0;
 	height:100%;
 	overflow: hidden;
-	
 	font-family:arial,sans-serif;
 	font-size:small;
 	color:#666;
 }
+/**** Base styles ****/
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  /*padding: 20px;*/
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.7em;
+    background: #1F1E1D;
+	color: #FFF;
+}
+
+h1, h2, h3, p, ul, ol, pre, dl {
+  margin-bottom: 2px;
+}
+
+h1, h2, #super-list, .element, .tagline, #index-list {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+h1, h2, h3 { font-weight: bold; }
+
+h1 {
+  font-size: 32px;
+  line-height: 1.1em;
+}
+
+h2 {
+  font-size: 24px;
+  line-height: 1.1em;
+}
+
+ul, ol {
+  margin-left: 1.5em;
+}
+
+a,
+a code {
+  color: #FB4;
+  text-decoration: none;
+}
+
+a:hover,
+a:hover code { 
+  color: #4BF; 
+}
+
+a:active,
+a:active code {
+  color: #1FB;
+  background: black;
+}
+
+a img { border: none; }
+
 
 h1 {
   font-size: 2em;
@@ -126,31 +201,37 @@ div#container {
 	max-height: 50px;
 }
 
+#container {
+  border: 1px solid #666;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+
 #mainContainer {
 	margin: 0;
 	height: 100%;
 	width: 100%;
+	background: #000;
 }
 
 #controlsContainer {
 	position: absolute;
-	top: 0px;
 	width: 100%;
+	top: 40px;
 	bottom: 85px;
-	overflow: scroll;
-	background-color: #000000;
+	overflow-y: scroll;
 }
 
 #controls {
 	position: static;
-	padding: 10px;
+	padding: 0px;
 }
 
 #selectorContainer {
 	position: fixed;
 	bottom: 0px;
 	width: 100%;
-	padding: 10px;
 	background-color: #333333;
 	overflow: scroll;
 	-webkit-overflow-scrolling: touch;
@@ -158,8 +239,10 @@ div#container {
 
 #classSelectors {
 	height: 85px;
-	max-width: 1200px;
-	width: 1000px;
+	max-height: 85px;
+	max-width: 2200px;
+	width: 1400px;
+	padding: 0 10px;
 }
 
 #locationSelectors {
@@ -171,11 +254,9 @@ div#container {
 }
 
 #classSelectors button {
-	/*
 	font-size: 20px;
 	width: 110px;
-	height: 110px;
-	*/
+	height: 40px;
 	/*
 	margin: 2px;
 	text-shadow: 0 1px hsla( 0, 0%, 100%, 0.5 );
@@ -218,98 +299,10 @@ div#container {
 
 
 
-/**** Base styles ****/
-
-html, body, div, span, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
-small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block;
-}
-
-body {
-  /*padding: 20px;*/
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Arial, sans-serif;
-  font-size: 13px;
-  line-height: 1.7em;
-    background: #1F1E1D;
-	color: #FFF;
-}
-
-h1, h2, h3, p, ul, ol, pre, dl {
-  margin-bottom: 2px;
-}
-
-h1, h2, #super-list, .element, .tagline, #index-list {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-}
-
-h1, h2, h3 { font-weight: bold; }
-
-h1 {
-  font-size: 32px;
-  line-height: 1.1em;
-}
-
-h2 {
-  font-size: 24px;
-  line-height: 1.1em;
-}
-
-ul, ol {
-  margin-left: 1.5em;
-}
-
-a,
-a code {
-  color: #FB4;
-  text-decoration: none;
-}
-
-a:hover,
-a:hover code { 
-  color: #4BF; 
-}
-
-a:active,
-a:active code {
-  color: #1FB;
-  background: black;
-}
-
-a img { border: none; }
 
 /**** Isotope styles ****/
 
 /* required for containers to inherit vertical size from window */
-html,
-body {
-	margin: 0;
-	height: 100%;
-	overflow:hidden;
-}
-
-#container {
-  border: 1px solid #666;
-  padding: 5px;
-  margin-bottom: 20px;
-}
-
 .element {
   width: 110px;
   height: 110px;
