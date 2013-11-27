@@ -7,6 +7,7 @@ define([ 'jquery',
     	'iscroll',
          'views/home', ], 
 function($, _, Backbone, MeemBus, UI, iScroll, HomeView) {
+	var TRACE = false;
 	var controlPanel;
 	
 	var AppRouter = Backbone.Router.extend({
@@ -18,28 +19,34 @@ function($, _, Backbone, MeemBus, UI, iScroll, HomeView) {
 		},
 
 		showHome : function() {
-			console.log("showing home");
+			if (TRACE) {
+				console.log("showing home");
+			}
 			//$('#mainContainer').append(this.homeView.$el);
 			setTimeout(function() {
 				controlPanel.filterWidgets(".house");
-			}, 50);
+			}, 100);
 		},
 		showFunction : function(fn) {
-			console.log("showing function: " + fn);
+			if (TRACE) {
+				console.log("showing function: " + fn);
+			}
 			//$('#mainContainer').append(this.homeView.$el);
 			setTimeout(function() {
 				controlPanel.filterWidgets("."+fn);
-			}, 50);
+			}, 100);
 		},
 		showLocation : function(loc) {
-			console.log("showing location: " + loc);
+			if (TRACE) {
+				console.log("showing location: " + loc);
+			}
 			//$('#mainContainer').append(this.homeView.$el);
 			setTimeout(function() {
 				controlPanel.filterWidgets("."+loc);
-			}, 50);
+			}, 100);
 		},
 
-		homeView : new HomeView(),
+		//homeView : new HomeView(),
 
 	});
 
@@ -47,9 +54,7 @@ function($, _, Backbone, MeemBus, UI, iScroll, HomeView) {
 		var app_router = new AppRouter();
 
 		$(document).ready(function() {
-
 			var meemBus = new MeemBus();
-			
 			controlPanel = new UI.ControlPanel(meemBus, $("#title"), $("#controls"), $("#classSelectors"));
 			controlPanel.getUI();
 
@@ -74,8 +79,6 @@ function($, _, Backbone, MeemBus, UI, iScroll, HomeView) {
 		    var selectorScroll = new iScroll('selectorContainer', { bounce: false, hScrollbar: false, vScrollbar: false });
 		    
 			Backbone.history.start();
-			
-			console.log("routes initialised");
 		});
 	};
 
