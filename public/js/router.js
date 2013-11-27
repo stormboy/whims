@@ -64,7 +64,7 @@ function($, _, Backbone, MeemBus, UI, iScroll, HomeView) {
 			});
 			window.onresize = function() {
 				$(document.body).width(window.innerWidth).height(window.innerHeight);
-			}
+			};
 			$(function() {
 				window.onresize();
 			});

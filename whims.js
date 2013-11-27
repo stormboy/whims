@@ -5,11 +5,11 @@
  * Author: Warren Bloomer
  */
 
-var config  = require('./settings')			// get settings
-var whims   = require('./lib/whims')
-var express = require('express')
-var http    = require('http')
-var path    = require('path')
+var config  = require('./settings')	;		// get settings
+var whims   = require('./lib/whims_sockjs');
+var express = require('express');
+var http    = require('http');
+var path    = require('path');
 var routes  = require('./routes');
 var stylus  = require("stylus");
 
