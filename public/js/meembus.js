@@ -13,6 +13,9 @@ function($, Router, Util, EventEmitter, SockJS) {
 	var TRACE = true;
 	var MAX_LISTENERS = 1000;
 	
+	var MIN_RECON_INTERVAL = 10;
+	var MAX_RECON_INTERVAL = 10000;
+	
 	/**
 	 * Allows Meem communications to occur over sockjs
 	 */
@@ -26,70 +29,11 @@ function($, Router, Util, EventEmitter, SockJS) {
 		
 		this.subscriptions = {};		// a hash of MQTT topics to subscribe to mapped to the number of client subscriptions requested
 		this.sessionOpened = false;
+		this._reconnectionInterval = MIN_RECON_INTERVAL;
 		console.log("creating new socket");
-		this.socket = new SockJS(this.socketUrl);
 		
-		var self = this;
-	
-		this.socket.onopen = function () {
-			if (TRACE) {
-				console.log('socket connected');
-			}
-		};
-		
-		this.socket.onclose = function () {
-			if (TRACE) {
-				console.log('socket disconnected');
-			}
-			alert("comms closed");
-			// TODO implement reconnect logic
-		};
 
-		this.socket.onmessage = function (message) {
-			message = JSON.parse(message.data);
-			switch(message.type) {
-				
-				case 'sessionOpened': 			// connected to MQTT service
-					var data = message.data || {};
-					self.sessionOpened = true;
-					if (TRACE) {
-						console.log('sessionOpened: ' + data.message);
-					}
-			
-					// do desired subscriptions 
-					for (var topic in self.subscriptions) {
-						if (TRACE) {
-							console.log("subscribing to topic: " + topic);
-						}
-						self.socket.send(JSON.stringify({
-							type: 'subscribe', 
-							topic: topic
-						}));
-					}
-			
-					// TODO wait for all subscriptions? before
-					self.emit("connected");
-					break;
-					
-				case 'sessionClosed': 			// disconnected from MQTT service
-					self.sessionOpened = false;
-					self.emit("disconnected");
-					break;
-					
-				case 'message': 				// handle incoming MQTT message
-					var data = message.data || {};
-					if (TRACE) {
-						//console.log('message topic: ' + data.topic + ' message: ' + data.message);
-					}
-					self.emit(data.topic, data.message);
-					break;
-					
-				default:
-					// unhandled message
-					//console.log("unhandled message: " + message.type);
-			}
-		};
-
+		this._createSocket();		
 	};
 	Util.inherits(MeemBus, EventEmitter);
 	
@@ -163,6 +107,90 @@ function($, Router, Util, EventEmitter, SockJS) {
 			this.socket.close();
 			this.socket = null;
 		}
+	};
+
+
+	/**
+	 * The amount of time before trying to reconnect socket
+	 */
+	MeemBus.prototype._getReconnectionInterval = function() {
+		if (this._reconnectionInterval > MAX_RECON_INTERVAL) {
+			this._reconnectionInterval = MAX_RECON_INTERVAL;
+		}
+		else if (this._reconnectionInterval < MAX_RECON_INTERVAL) {
+			this._reconnectionInterval *= 1.2;
+			this._reconnectionInterval = this._reconnectionInterval > MAX_RECON_INTERVAL ? MAX_RECON_INTERVAL : this._reconnectionInterval;
+		}
+		return this._reconnectionInterval;
+	};
+
+	MeemBus.prototype._createSocket = function() {
+		this.socket = new SockJS(this.socketUrl);
+		
+		var self = this;
+	
+		this.socket.onopen = function () {
+			if (TRACE) {
+				console.log('socket connected');
+			}
+			self._reconnectionInterval = MIN_RECON_INTERVAL;	// reset reconnection interval
+		};
+		
+		this.socket.onclose = function () {
+			if (TRACE) {
+				console.log('socket disconnected');
+			}
+			self.emit("disconnected");
+			// try to reconnect after an interval
+			self._reconTimeout = setTimeout(function() {
+				self._createSocket();
+			}, self._getReconnectionInterval());
+		};
+
+		this.socket.onmessage = function (message) {
+			message = JSON.parse(message.data);
+			switch(message.type) {
+				
+				case 'sessionOpened': 			// connected to MQTT service
+					var data = message.data || {};
+					self.sessionOpened = true;
+					if (TRACE) {
+						console.log('sessionOpened: ' + data.message);
+					}
+			
+					// do desired subscriptions 
+					for (var topic in self.subscriptions) {
+						if (TRACE) {
+							console.log("subscribing to topic: " + topic);
+						}
+						self.socket.send(JSON.stringify({
+							type: 'subscribe', 
+							topic: topic
+						}));
+					}
+			
+					// TODO wait for all subscriptions? before
+					self.emit("connected");
+					break;
+					
+				case 'sessionClosed': 			// disconnected from MQTT service
+					self.sessionOpened = false;
+					self.emit("disconnected");
+					break;
+					
+				case 'message': 				// handle incoming MQTT message
+					var data = message.data || {};
+					if (TRACE) {
+						//console.log('message topic: ' + data.topic + ' message: ' + data.message);
+					}
+					self.emit(data.topic, data.message);
+					break;
+					
+				default:
+					// unhandled message
+					//console.log("unhandled message: " + message.type);
+			}
+		};
 	};
 	
 	return MeemBus;
