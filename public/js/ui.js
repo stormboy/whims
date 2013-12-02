@@ -35,40 +35,20 @@ function($, Router, Widgets, Util, EventEmitter) {
 		this.controlsElement = controlsElement;
 		this.selectorElement = selectorElement;
 		
-		this.functionFilter = "*";
-		this.locationFilter = "*";
+		this.filter = ".house";
 		
 		// a map of class filters
 		this.classFilters = {};
 	
 		// display a filtered set of widgets as per selector
 		this.filterWidgets = function(selector) {
+			this.filter = selector;
 			setTimeout(function() {
 				self.controlsElement.isotope( { filter : selector } );
 			}, 50);
 		};
 	};
 	Util.inherits(ControlPanel, EventEmitter);
-		
-		
-	ControlPanel.prototype.doFilter = function() {
-		if (this.functionFilter == null) {
-			if (this.locationFilter == null) {
-				this.filterWidgets("*");
-			}
-			else {
-				this.filterWidgets(this.locationFilter);
-			}
-		}
-		else {
-			if (this.locationFilter == null) {
-				this.filterWidgets(this.functionFilter);
-			}
-			else {
-				this.filterWidgets(this.functionFilter + this.locationFilter);
-			}
-		}
-	};
 		
 	/*
 	 * get UI configuration data 
@@ -93,7 +73,8 @@ function($, Router, Widgets, Util, EventEmitter) {
 	ControlPanel.prototype.uiData = function(data) {
 		var self = this;
 		
-		this.titleElement.html(data.title);
+		this.title = data.title;
+		//this.titleElement.html(data.title);
 		
 		// create filter buttons
 		for (var i=0; i<data.filters.length; i++) {
@@ -121,16 +102,14 @@ function($, Router, Widgets, Util, EventEmitter) {
 			$el.click(function() {
 				var f = self.classFilters[this.id];
 				if (f) {
-					self.functionFilter = null;
-					self.locationFilter = null;
 					switch (f.type) {
 					case "location":
-						self.locationFilter = "." + f['class'];
-						window.location.assign( '#location/' + f['class'] );
+						//self.locationFilter = "." + f['class'];
+						location.href = '#location/' + f['class'];
 						break;
 					case "function":
-						self.functionFilter = "." + f['class'];
-						location.href='#function/' + f['class'];
+						//self.functionFilter = "." + f['class'];
+						location.href = '#function/' + f['class'];
 						break;
 					}
 					//self.doFilter();
@@ -167,10 +146,11 @@ function($, Router, Widgets, Util, EventEmitter) {
 			},
 			onLayout : function($elems, instance) {
 				self.emit("layout");
-			}
+			},
+			filter : self.filter
 		});
 	
-		this.filterWidgets(".house");	// initial controls filter
+		//this.filterWidgets(".house");	// initial controls filter
 	};
 	
 	/**

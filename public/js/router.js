@@ -60,7 +60,7 @@ function($, _, Backbone, MeemBus, UI, iScroll, HomeView) {
 			$(function() {
 				window.onresize();
 			});
-						
+
 			// javascript scrollers
 			var controlsScroll = new iScroll('controlsContainer', { bounce: false });
 		    var selectorScroll = new iScroll('selectorContainer', { bounce: false, hScrollbar: false, vScrollbar: false });
