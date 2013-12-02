@@ -347,6 +347,17 @@
 			"queryPath" : "/data/log",
 			"responsePath": "/response/house/thermostat/Home",
 			"symbol" : "<img src='images/icons/eye-watch.png'/>"
+		},
+		{	"name" : "Test Togler",
+			"widget" : "BinaryButton",
+			"path" : "/meem/123456789ABCDEF",
+            "inFacet" : "out/binaryOut",
+            "outFacet" : "in/binaryIn",
+			"classes" : "office hvac security blind",
+			"onSymbol" : "<img src='images/icons/butterfly.png'/>",
+			"offSymbol" : "<img src='images/icons/ladybug.png'/>",
+			"onText" : "on",
+			"offText" : "off"
 		}
 
 	]

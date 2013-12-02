@@ -1,6 +1,6 @@
 /**
  * An app that serves html, css and js files, as well as providing a
- * socket.io wrapper around an MQTT service. 
+ * SockJS service to allow the web UI to interface with a Meem MQTT service. 
  * 
  * Author: Warren Bloomer
  */
