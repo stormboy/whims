@@ -1,7 +1,7 @@
 define([ 'jquery', 
          'backbone', 
          'd3',
-		'jade!templates/widgets/line_chart' ], 
+         'jade!templates/widgets/line_chart' ], 
 function($, Backbone, d3, ChartTemplate) {
 	
 	var ChartView = Backbone.View.extend({
@@ -52,10 +52,30 @@ function($, Backbone, d3, ChartTemplate) {
 		},
 		
 		render: function () { 
+			var self = this;
 			var compiledTemplate = ChartTemplate(this.model);
 			this.setElement($(compiledTemplate).get());
 			
+			// add a refresh function to the element
+			this.el.refresh = function() {
+				self.refresh();
+			};
+			
 			return this;
+		},
+		
+		// refresh line-chart axes and labels
+		refresh: function() {
+			var c = this.chartStuff;
+			var svg = c.svg.transition();
+			svg.select(".x.axis") 	// update the x axis
+			    .duration(750)
+			    .call(c.xAxis);
+			svg.select(".y.axis") 	// update the y axis
+			    .duration(750)
+			    .call(c.yAxis);
+			svg.select(".y.unit")	// update the unit label
+			    .text(this.model.unit || "");
 		},
 
 		events: {
@@ -83,7 +103,7 @@ function($, Backbone, d3, ChartTemplate) {
 		
 		_requestData: function() {
 			var format = d3.time.format.iso;
-			var time = d3.time.hour.offset(new Date(), -1);
+			var time = d3.time.hour.offset(new Date(), -(this.model.hours || 1));	// start time is x hours ago
 
 			// /data/log?/path=/house/meter/power/demand&from=2013-03-08T18:49:10.000Z => /response/12345"			
 			var topic = this.model.queryPath + "?/path=" + this.model.path + "/" + this.model.inFacet;
@@ -95,7 +115,7 @@ function($, Backbone, d3, ChartTemplate) {
 		
 		_initChart: function() {
 			var self = this;
-			var c = {}
+			var c = {};
 			this.chartStuff = c;
 			c.margin = {top: 20, right: 20, bottom: 30, left: 50};
 			c.width = 320 - c.margin.left - c.margin.right;
@@ -123,11 +143,10 @@ function($, Backbone, d3, ChartTemplate) {
 			      .y(function(d) { return c.y(d[1]); });
 			  
 			c.svg = d3.select(this.$el.find(".chart")[0]).append("svg")
-			//c.svg = this.$el.find(".chart").append("svg")
-			      .attr("width", c.width + c.margin.left + c.margin.right)
-			      .attr("height", c.height + c.margin.top + c.margin.bottom)
-			    .append("g")
-			      .attr("transform", "translate(" + c.margin.left + "," + c.margin.top + ")");
+				.attr("width", c.width + c.margin.left + c.margin.right)
+				.attr("height", c.height + c.margin.top + c.margin.bottom)
+				.append("g")
+				.attr("transform", "translate(" + c.margin.left + "," + c.margin.top + ")");
 		},
 		
 		_data: null,
@@ -162,8 +181,10 @@ function($, Backbone, d3, ChartTemplate) {
 	
 				c.svg.append("g").attr("class", "y axis")
 				   .call(c.yAxis)
-				   .append("text").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style("text-anchor", "end")
-				   .text(this.options.unit);
+				   .append("text")
+				   .attr("class", "y unit")
+				   .attr("transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style("text-anchor", "end")
+				   .text(this.model.unit || "");
 	
 				c.svg.append("path").datum(data.values).attr("class", "line").attr("d", c.line);
 				

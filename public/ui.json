@@ -336,6 +336,17 @@
 			"unit" : "Watts",
 			"classes" : "house energy",
 			"symbol" : "<img src='images/icons/eye-watch.png'/>"
+		},
+		{	"name" : "Temperature",
+			"widget" : "DataChart",
+			"path" : "/house/thermostat/Home",
+            "inFacet" : "currentTemperature",
+            "unit" : "°C",
+            "hours" : 24,
+            "classes" : "hvac",
+			"queryPath" : "/data/log",
+			"responsePath": "/response/house/thermostat/Home",
+			"symbol" : "<img src='images/icons/eye-watch.png'/>"
 		}
 
 	]

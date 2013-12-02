@@ -145,12 +145,16 @@ function($, Router, Widgets, Util, EventEmitter) {
 				rowHeight : 400
 			},
 			onLayout : function($elems, instance) {
+				// refresh visible elements
+				$elems.each(function(i, elem) {
+					if (elem.refresh) {
+						elem.refresh();
+					}
+				});
 				self.emit("layout");
 			},
 			filter : self.filter
 		});
-	
-		//this.filterWidgets(".house");	// initial controls filter
 	};
 	
 	/**
@@ -161,6 +165,8 @@ function($, Router, Widgets, Util, EventEmitter) {
 	 */
 	ControlPanel.prototype.addWidget = function(widgetId, widget) {
 		var self = this;
+		
+		// TODO use isotope insert: self.controlsElement.isotope( 'insert', $newItems );
 		
 		if (self.updateTimeout) {
 			// clear re-layout timer
