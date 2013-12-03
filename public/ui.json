@@ -340,24 +340,24 @@
 		{	"name" : "Temperature",
 			"widget" : "DataChart",
 			"path" : "/house/thermostat/Home",
-            "inFacet" : "currentTemperature",
-            "unit" : "°C",
-            "hours" : 24,
-            "classes" : "hvac",
+			"inFacet" : "currentTemperature",
+			"unit" : "°C",
+			"hours" : 24,
+			"classes" : "hvac",
 			"queryPath" : "/data/log",
 			"responsePath": "/response/house/thermostat/Home",
 			"symbol" : "<img src='images/icons/eye-watch.png'/>"
 		},
-		{	"name" : "Test Togler",
-			"widget" : "BinaryButton",
-			"path" : "/meem/123456789ABCDEF",
-            "inFacet" : "out/binaryOut",
-            "outFacet" : "in/binaryIn",
-			"classes" : "office hvac security blind",
-			"onSymbol" : "<img src='images/icons/butterfly.png'/>",
+		{	"name"      : "Test Togler",
+			"widget"    : "BinaryButton",
+			"path"      : "/meem/6cba38a4-cc17-4c4f-a677-b0177ead44f0",
+			"inFacet"   : "out/binaryOut",
+			"outFacet"  : "in/binaryIn",
+			"classes"   : "office hvac security blind",
+			"onSymbol"  : "<img src='images/icons/butterfly.png'/>",
 			"offSymbol" : "<img src='images/icons/ladybug.png'/>",
-			"onText" : "on",
-			"offText" : "off"
+			"onText"    : "on",
+			"offText"   : "off"
 		}
 
 	]
