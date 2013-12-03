@@ -45,7 +45,6 @@ function($, Backbone, LinearTemplate) {
 		},
 
 		doOn: function(event) {
-			console.log("sending on");
 			var topic = this.model.path + "/" + this.model.outFacet;
 			var message = JSON.stringify({ value: true });
 			this.meemBus.publish(topic, message);
@@ -59,7 +58,7 @@ function($, Backbone, LinearTemplate) {
 		
 		_acceptMessage: function(message) {
 			try {
-				var value = JSON.parse(message).value;
+				var value = message.value;
 				if (this.lastValue != value) {
 					// display value and animate 
 					//this.$el.find("#offElement .number").text(value ? "0" : "1");

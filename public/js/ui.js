@@ -133,9 +133,10 @@ function($, Router, Widgets, Util, EventEmitter) {
 		
 		// initiate isotope layout on the #controls element
 		this.controlsElement.isotope({
-			layoutMode : 'fitRows',
+			//layoutMode : 'fitRows',
+			layoutMode : 'masonry',
 			masonry : {
-				columnWidth : 100
+				//columnWidth : 100
 			},
 			masonryHorizontal : {
 				rowHeight : 100
@@ -229,9 +230,12 @@ function($, Router, Widgets, Util, EventEmitter) {
 		
 		// relayout isotope container
 		self.updateTimeout = setTimeout(function() {
-			console.log("updating controls panel");
+			if (TRACE) {
+				console.log("updating controls panel");
+			}
 			self.controlsElement.isotope({
-				layoutMode : 'fitRows'
+				//layoutMode : 'fitRows'
+				layoutMode : 'masonry'
 			});
 			self.updateTimeout = null;
 		}, 100);

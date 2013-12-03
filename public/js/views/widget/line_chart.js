@@ -21,7 +21,7 @@ function($, Backbone, d3, ChartTemplate) {
 			
 			// subscribe to initial request responses
 			this.meemBus.subscribe(this.model.responsePath, function(message) {
-				self._data = JSON.parse(message);
+				self._data = message;
 				self._handleData(self._data);
 			});
 
@@ -83,9 +83,8 @@ function($, Backbone, d3, ChartTemplate) {
 
 		_acceptMessage: function(message) {
 			try {
-				var data = JSON.parse(message);
-				var timestamp = data.timestamp;
-				var value = data.value;
+				var timestamp = message.timestamp;
+				var value = message.value;
 				
 				// TODO unit conversion
 				//value = UnitTools.convert(data.value, data.unit, this.unit);

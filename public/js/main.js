@@ -14,6 +14,8 @@ require.config({
 		jade :                "./lib/jade",
 		templates :           "../templates",
 		eventemitter :        "./lib/eventemitter2",
+		//swiper :              "./lib/idangerous.swiper-2.0.min",
+		quantities :          "./lib/quantities",
 		util :                "./lib/util",
 	},
 	"shim": {
@@ -38,11 +40,14 @@ require.config({
 		iscroll : {
 			exports :        "iScroll",
 		},
+		swiper : {
+			exports :        "swiper"
+		}
 	}	
 });
 
 require(["app"],
 	function(App){
-		console.log("initialising app");
+		//console.log("initialising app");
 		App.initialize();
 });

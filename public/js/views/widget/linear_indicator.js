@@ -1,7 +1,8 @@
 define([ 'jquery', 
          'backbone', 
+         'quantities',
 		'jade!templates/widgets/linear_indicator' ], 
-function($, Backbone, LinearTemplate) {
+function($, Backbone, Qty, LinearTemplate) {
 	
 	/**
 	 * Add comma separators to large numbers
@@ -22,20 +23,21 @@ function($, Backbone, LinearTemplate) {
 
 		initialize : function(options) {
 			var self = this;
+			this.model = {
+				name: "Indicator",
+				path: "",
+				inFacet: "out/linearOutput",
+				unit: "W",
+			};
+			for (var attrname in options.model) { this.model[attrname] = options.model[attrname]; }	// copy options to model
+
 			this.meemBus = options.meemBus;
 			
-			this.meemBus.subscribe(options.model.path + "/" + options.model.inFacet, function(message) {
+			this.meemBus.subscribe(this.model.path + "/" + this.model.inFacet, function(message) {
 				self._acceptMessage(message);
 			});
 			
 			this.render();
-		},
-		
-		model : {
-			name: "Indicator",
-			path: "",
-			inFacet: "out/linearOutput",
-			unit: "W",
 		},
 		
 		render: function () { 
@@ -48,22 +50,37 @@ function($, Backbone, LinearTemplate) {
 		events: {
 		},
 
-		
 		_acceptMessage: function(message) {
 			try {
-				var payload = JSON.parse(message)
-				var value = payload.value;
+				var value = message.value;
 				// TODO convert unit
 				// value = UnitTool.convert(value, payload.unit, this.unit);
 				if (this.lastValue != value) {
-					this.$el.find(".name").text( addCommas(value) );
-					//this.linearElement.stop(true);		// cancel previous effects
-					//this.linearElement.effect("shake", {direction: "up", distance: 3}, 90);
+					var displayValue = value;
+					var altValue = value;
+					var unit = message.unit ? message.unit : "";
+					var valueString = value + unit;
+					if (this.model.unit) {
+						// convert to configured units
+						var qty = new Qty(valueString);
+						displayValue = qty.toString(this.model.unit, 0);
+					}
+					if (this.model.altUnit) {
+						var qty = new Qty(valueString);
+						altValue = qty.to(this.model.altUnit).toPrec(0.1).scalar + " " + this.model.altUnit;
+					}
+					else {
+						altValue = addCommas(value) + " " + unit;
+					}
+					this.$el.find(".toggleButton").text( addCommas(displayValue) );	// TODO convert units
+					this.$el.find(".name").text( altValue );
+
 					this.lastValue = value;
 				}
 			}
 			catch (e) {
 				// problem
+				console.log("problem accepting message: " + e);
 			}
 		},
 	});

@@ -141,6 +141,10 @@ div#container {
 	cursor: pointer;
 	min-width: 90px;
 	min-height: 70px;
+	font-size: 28px;
+	line-height: 70px;
+	text-align: center;
+	color: #333;
 	opacity: 0.90;
 	filter:alpha(opacity=90);
 	-moz-opacity:0.90;
@@ -161,6 +165,7 @@ div#container {
 	border: line;
 	background: #444;
 	margin : 3px;
+	padding: 0px 2px 0 2px;
 	
   -webkit-border-top-right-radius: 1.2em;
       -moz-border-radius-topright: 1.2em;
@@ -178,7 +183,7 @@ div#container {
 	color: #CCC;
 	text-shadow: none;
 	font-size: 16px;
-	margin: 5px 5px 0 5px;
+	margin: 0 0 1px 1px;
 }
 
 .pushButton {
@@ -241,7 +246,7 @@ div#container {
 	height: 85px;
 	max-height: 85px;
 	max-width: 2200px;
-	width: 1400px;
+	width: 1200px;
 	padding: 0 10px;
 }
 
@@ -256,7 +261,7 @@ div#container {
 #classSelectors button {
 	font-size: 20px;
 	width: 110px;
-	height: 40px;
+	height: 55px;
 	/*
 	margin: 2px;
 	text-shadow: 0 1px hsla( 0, 0%, 100%, 0.5 );
@@ -286,22 +291,17 @@ div#container {
 }
 
 /* the different widget classes */
-.security   .element     { background: #F00; background: hsl(   0, 100%, 60%); }
-.light      .element     { background: #F80; background: hsl(  36, 100%, 65%); }
-.energy     .element     { background: #FF0; background: hsl(  72, 100%, 50%); }
+.security   .element     { background: #F00; background: hsl(   0, 100%, 70%); }
+.light      .element     { background: #F80; background: hsl(  36, 100%, 68%); }
+.energy     .element     { background: #FF0; background: hsl(  72, 100%, 66%); }
 .util       .element     { background: #0F0; background: hsl( 108, 100%, 50%); }
 .transition .element     { background: #0F8; background: hsl( 144, 100%, 50%); }
 .gate       .element     { background: #0FF; background: hsl( 180, 100%, 50%); }
-.hvac       .element     { background: #08F; background: hsl( 216, 100%, 66%); }
+.hvac       .element     { background: #08F; background: hsl( 216, 100%, 77%); }
 .auto-light .element     { background: #00F; background: hsl( 252, 100%, 50%); }
-.av         .element     { background: #F0F; background: hsl( 262, 74%, 74%); }
-.blind      .element     { background: #F08; background: hsl( 324, 77%, 67%); }
+.av         .element     { background: #F0F; background: hsl( 262, 74%, 84%); }
+.blind      .element     { background: #F08; background: hsl( 324, 77%, 72%); }
 .disabled   .element     { background: #666; }
-
-
-
-
-
 
 
 /**** Isotope styles ****/
@@ -310,7 +310,7 @@ div#container {
 .element {
   width: 110px;
   height: 110px;
-  margin: 5px;
+  margin: 0 1px 2px 1px;
   float: left;
   overflow: hidden;
   position: relative;

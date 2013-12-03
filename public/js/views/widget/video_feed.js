@@ -58,7 +58,7 @@ function($, Backbone, LinearTemplate) {
 		
 		_acceptMessage: function(message) {
 			try {
-				var value = JSON.parse(message).value;
+				var value = message.value;
 				if (this.lastValue != value) {
 					// display value and animate 
 					//this.$el.find("#offElement .number").text(value ? "0" : "1");

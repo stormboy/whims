@@ -7,23 +7,26 @@ function($, Backbone, ButtonTemplate) {
 
 		initialize : function(options) {
 			var self = this;
+			
+			// defaults
+			this.model = {
+				name: "Button",
+				path: "",
+				inFacet: "out/binaryOutput",
+				outFacet: "in/binaryInput",
+				onSymbol: "on",
+				offSymbol: "off",
+				onText: "on",
+				offText: "off",
+			};
+			for (var attrname in options.model) { this.model[attrname] = options.model[attrname]; }	// copy options to model
+			
 			this.meemBus = options.meemBus;
-			this.meemBus.subscribe(options.model.path + "/" + options.model.inFacet, function(message) {
+			this.meemBus.subscribe(this.model.path + "/" + this.model.inFacet, function(message) {
 				self._acceptMessage(message);
 			});
 			
 			this.render();
-		},
-		
-		model : {
-			name: "Button",
-			path: "",
-			inFacet: "out/binaryOutput",
-			outFacet: "in/binaryInput",
-			onSymbol: "on",
-			offSymbol: "off",
-			onText: "on",
-			offText: "off",
 		},
 		
 		render: function () { 
@@ -39,23 +42,23 @@ function($, Backbone, ButtonTemplate) {
 		},
 
 		doOn: function(event) {
-			console.log("sending on");
+			//console.log("sending on");
 			var topic = this.model.path + "/" + this.model.outFacet;
 			var message = JSON.stringify({ value: true });
 			this.meemBus.publish(topic, message);
 		},
 		
 		doOff: function(event) {
-			console.log("sending off");
+			//console.log("sending off");
 			var topic = this.model.path + "/" + this.model.outFacet;
 			var message = JSON.stringify({ value: false });
 			this.meemBus.publish(topic, message);
 		},
 		
 		_acceptMessage: function(message) {
-			console.log("handing binary message: " + message);
+			//console.log("handing binary message: " + message);
 			try {
-				var value = JSON.parse(message).value;
+				var value = message.value;
 				if (this.lastValue != value) {
 					this.$el.find("#offElement .number").text(value ? "0" : "1");
 					this.$el.find("#onElement .number").text(value ? "1" : "0");

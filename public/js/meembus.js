@@ -1,6 +1,9 @@
 /**
  * Meem protocol over sockjs
  */
+/**
+ * TODO parse messages that are not objects, assuming the payload is JSON.
+ */
 define([
     	'jquery',
     	'router',
@@ -10,7 +13,7 @@ define([
     ], 
 function($, Router, Util, EventEmitter, SockJS) {
 	
-	var TRACE = true;
+	var TRACE = false;
 	var MAX_LISTENERS = 1000;
 	
 	var MIN_RECON_INTERVAL = 10;
@@ -30,9 +33,9 @@ function($, Router, Util, EventEmitter, SockJS) {
 		this.subscriptions = {};		// a hash of MQTT topics to subscribe to mapped to the number of client subscriptions requested
 		this.sessionOpened = false;
 		this._reconnectionInterval = MIN_RECON_INTERVAL;
-		console.log("creating new socket");
-		
-
+		if (TRACE) {
+			console.log("creating new socket");
+		}
 		this._createSocket();		
 	};
 	Util.inherits(MeemBus, EventEmitter);
@@ -183,7 +186,8 @@ function($, Router, Util, EventEmitter, SockJS) {
 					if (TRACE) {
 						//console.log('message topic: ' + data.topic + ' message: ' + data.message);
 					}
-					self.emit(data.topic, data.message);
+					var message = (typeof data.message == 'string') ? JSON.parse(data.message) : data.message;
+					self.emit(data.topic, message);
 					break;
 					
 				default:
