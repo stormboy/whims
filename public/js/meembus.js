@@ -27,7 +27,7 @@ function($, Router, Util, EventEmitter, SockJS) {
 		
 		options = options || {};
 	
-		this.socketUrl = options.socketUrl || "/socket";			// socket on the same server
+		this.socketUrl = options.socketUrl || "/meem";			// socket on the same server
 		this.setMaxListeners(MAX_LISTENERS);	// increase maximum listeners
 		
 		this.subscriptions = {};		// a hash of MQTT topics to subscribe to mapped to the number of client subscriptions requested
