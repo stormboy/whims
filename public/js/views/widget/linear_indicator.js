@@ -57,22 +57,23 @@ function($, Backbone, Qty, LinearTemplate) {
 				// value = UnitTool.convert(value, payload.unit, this.unit);
 				if (this.lastValue != value) {
 					var displayValue = value;
-					var altValue = value;
 					var unit = message.unit ? message.unit : "";
-					var valueString = value + unit;
+					var qty = new Qty(value + unit);
+					
+					// display main value
 					if (this.model.unit) {
-						// convert to configured units
-						var qty = new Qty(valueString);
-						displayValue = qty.toString(this.model.unit, 0);
+						displayValue = qty.to(this.model.unit).toPrec(1).scalar;
 					}
+					this.$el.find(".toggleButton").text( addCommas(displayValue) );	// TODO convert units
+					
+					// display value in alternative units
+					var altValue = value;
 					if (this.model.altUnit) {
-						var qty = new Qty(valueString);
 						altValue = qty.to(this.model.altUnit).toPrec(0.1).scalar + " " + this.model.altUnit;
 					}
 					else {
 						altValue = addCommas(value) + " " + unit;
 					}
-					this.$el.find(".toggleButton").text( addCommas(displayValue) );	// TODO convert units
 					this.$el.find(".name").text( altValue );
 
 					this.lastValue = value;
