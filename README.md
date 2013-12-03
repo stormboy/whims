@@ -34,6 +34,14 @@ Configuration for the UI is in html/ui.json.  This specifies filters for determi
 
 In the future, the widgets displayed will be determined by a "hyperspace category" which will relate to an MQTT topic. 
 
+###Optimise
+
+To compile the client-side javascript app.
+
+	> ./node_modules/requirejs/bin/r.js -o app.build.js
+
+This will optimise and bundle client files in the public-build folder.  If you run the app with NODE_ENV=production file will be served from this directory.
+
 ###Run
 
 Make sure an MQTT server is running on localhost, or where mqttHost is set in settings.json.
@@ -60,7 +68,7 @@ Then navigate to
 
     http://localhost:8000/
     
-or if you are running on a different server or changed the serverPort configuration
+or if you are running on a different server or changed the "port" value in the configuration
 
     http://yourhost:yourport/
 
@@ -98,18 +106,28 @@ Credits
 
 <a href="http://expressjs.com/">Express</a> web application framework for node.
 
-<a href="https://github.com/adamvr/MQTT.js">mqttjs</a> MQTT module for Node.js.
+<a href="https://github.com/adamvr/MQTT.js/">mqtt.js</a> MQTT module for Node.js.
 
-<a href="http://socket.io/">Socket.IO</a> for both server and client side of web communications.
+<a href="https://github.com/sockjs">SockJS</a> for both server and client side of web communications.
 
-<a href="http://jquery.org/">jQuery</a> and <a href="http://jqueryui.com/">jQeury UI</a>
+<a href="http://socket.io/">Socket.IO</a> for both server and client side of web communications (previous versions of Whims).
 
-<a href="http://jquerymobile.com/">jQuery Mobile</a>
+<a href="http://requirejs.org/">RequireJS</a> for asynchronous module loading and for compiling/optimising (using r.js).
+
+<a href="http://jquery.org/">jQuery</a>
+
+<a href="http://http://backbonejs.org/">Backbone</a> and <a href="http://underscorejs.org/">Underscore</a>
+
+<a href="https://github.com/hij1nx/EventEmitter2">EventEmitter2</a> replicating Node's EventEmitter behaviour on client-side.
 
 <a href="http://d3js.org/">Data-Driven Documents (D3)</a> for graphs.
 
+<a href="https://github.com/gentooboontoo/js-quantities/">JS-quantities</a> SI unit conversion.
+
 <a href="http://isotope.metafizzy.co/">Isotope</a> for dynamic Javascript layout. This requires a <a href="http://metafizzy.co/#isotope-license">license</a> if you are to use it for commercial purposes. 
 
-<a href="https://github.com/cubiq/iscroll">iScroll</a> for better scrolling with touch devices.
+<a href="https://github.com/cubiq/iscroll">iScroll</a> for better scrolling with touch devices (no bounce-backs).
+
+<a href="https://github.com/visionmedia/jade">Jade</a> for server page generation and client-widget templating.
 
 <a href="http://www.simplefly.nl/icons">Simplefly</a> for icons on the demonstration UI.
