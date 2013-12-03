@@ -1,10 +1,9 @@
 require.config({
 	"baseUrl": "js",
 	"paths": {
-		jquery :              "./lib/jquery-1.9.1.min",
+		jquery :              "./lib/jquery-2.0.3.min",
 		underscore :          "./lib/underscore-min",
 		backbone :            "./lib/backbone-min",
-		//socketio :            "../socket.io/socket.io",
 		sockjs :              "./lib/sockjs-0.3.min",
 		isotope :             "./lib/jquery.isotope.min",
 		d3 :                  "./lib/d3.v3.min",
