@@ -1,12 +1,13 @@
 WHIMS
 =====
-###(Web Hyperspace Interface via MQTT over Socket.IO)
+###(Web Hyperspace Interface via MQTT over SockJS)
 
-This project provides a web interface a MQTT service.
-A browser or other Socket.IO client communicates to a MQTT server over standard HTTP/1.1 protocols. 
+This project provides a web interface to a MQTT service.  It also supplies a module for creating "things" that interact over MQTT.
+
+A browser or other SockJS client communicates to a MQTT server over standard HTTP/1.1 protocols. 
 The topic structure, messages and payload format are specified in the Meemplex specifications (to be announced). 
 
-For now, JSON is used as payload format.
+At this point in time, JSON is used as payload format.
 e.g.
     {
         "value" : 2398,
@@ -15,8 +16,8 @@ e.g.
     }
 
 The intention is that this can provide a gateway for "things" (e.g. devices, browsers, servers) to communicate with other things over standard web protocols.
-This services provides the ability to add a layer of security to things communicating with the MQTT server.
 
+This service provides the ability to add a layer of security to things communicating with the MQTT server.
 
 How to Run
 ----------
@@ -28,11 +29,11 @@ The server is implemented in Node.js and depends on a few external modules.
 
 ###Configure
 
-Update setting.js to point configure the port for the server to listen on and the connection of your MQTT server.
+Update setting.js to point configure the port for the web server to listen on and the connection details of your MQTT server.
 
-Configuration for the UI is in html/ui.json.  This specifies filters for determining which widgets to display on the screen as well as the set of sidgets to display.
+Configuration for the UI is in html/ui.json.  This specifies filters for determining which widgets to display on the screen as well as the set of widgets to display.
 
-In the future, the widgets displayed will be determined by a "hyperspace category" which will relate to an MQTT topic. 
+In the future, the widgets displayed will be determined by a "hyperspace category" which will relate to an MQTT topic.
 
 ###Optimise
 
@@ -44,7 +45,7 @@ This will optimise and bundle client files in the public-build folder.  If you r
 
 ###Run
 
-Make sure an MQTT server is running on localhost, or where mqttHost is set in settings.json.
+Make sure an MQTT server is running on the host and port specified in settings.json.
 
 To run, type the following in the root of the project
 
@@ -91,13 +92,7 @@ Web interface to
  <li>share topics</li>
 </ul>
 
-Provide a straight WebSocket service so that clients who do not need the overhead of Socket.IO can connect. e.g. Arduinos
-
-Arduino WebSocket client: https://github.com/krohling/ArduinoWebsocketClient
-
-Or make a SocketIO client library for Arduino, based on SocketIO spec here: https://github.com/LearnBoost/socket.io-spec
-
-Can wrap WS client (as is done here for Android https://github.com/koush/android-websockets/blob/master/src/com/codebutler/android_websockets/SocketIOClient.java)
+Instructions for setting up nginx reverse proxy allowing for websockets.
 
 Credits
 -------
