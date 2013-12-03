@@ -39,13 +39,14 @@ function($, Router, Widgets, Util, EventEmitter) {
 		
 		// a map of class filters
 		this.classFilters = {};
+		this.laidOut = false;
 	
 		// display a filtered set of widgets as per selector
 		this.filterWidgets = function(selector) {
 			this.filter = selector;
-			setTimeout(function() {
+			if (this.laidOut) {
 				self.controlsElement.isotope( { filter : selector } );
-			}, 50);
+			}
 		};
 	};
 	Util.inherits(ControlPanel, EventEmitter);
@@ -152,9 +153,10 @@ function($, Router, Widgets, Util, EventEmitter) {
 						elem.refresh();
 					}
 				});
+				self.laidOut = true;
 				self.emit("layout");
 			},
-			filter : self.filter
+			filter : this.filter
 		});
 	};
 	
@@ -167,12 +169,12 @@ function($, Router, Widgets, Util, EventEmitter) {
 	ControlPanel.prototype.addWidget = function(widgetId, widget) {
 		var self = this;
 		
-		// TODO use isotope insert: self.controlsElement.isotope( 'insert', $newItems );
+		// TODO if already laidOut, use isotope insert: self.controlsElement.isotope( 'insert', $newItems );
 		
-		if (self.updateTimeout) {
-			// clear re-layout timer
-			clearTimeout(self.updateTimeout);
-		}
+		// if (self.updateTimeout) {
+			// // clear re-layout timer
+			// clearTimeout(self.updateTimeout);
+		// }
 		
 		if (TRACE) {
 			console.log("adding widget: " + widget.widget);
@@ -229,16 +231,16 @@ function($, Router, Widgets, Util, EventEmitter) {
 		}
 		
 		// relayout isotope container
-		self.updateTimeout = setTimeout(function() {
-			if (TRACE) {
-				console.log("updating controls panel");
-			}
-			self.controlsElement.isotope({
-				//layoutMode : 'fitRows'
-				layoutMode : 'masonry'
-			});
-			self.updateTimeout = null;
-		}, 100);
+		// self.updateTimeout = setTimeout(function() {
+			// if (TRACE) {
+				// console.log("updating controls panel");
+			// }
+			// self.controlsElement.isotope({
+				// //layoutMode : 'fitRows'
+				// layoutMode : 'masonry'
+			// });
+			// self.updateTimeout = null;
+		// }, 100);
 	
 	};
 	
