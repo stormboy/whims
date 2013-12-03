@@ -18,7 +18,7 @@ var app = express();
 
 app.locals.basepath = config.basePath || "";  // set basepath variable
 
-app.set('port', config.serverPort || 3000);
+app.set('port', config.port || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.engine('jade', require('jade').__express);
@@ -58,9 +58,10 @@ server.listen(app.get('port'), function(){
 
 // create whims service (MQTT over socket.io)
 var options = { 
-	mqttHost: config.mqttHost, 
-	mqttPort: config.mqttPort, 
-	log : config.log 
+	mqttHost: config.mqtt.host || "localhost", 
+	mqttPort: config.mqtt.port || 1883,
+	log: config.log || {},
+	sockjs: config.sockjs || {}
 };
 console.log("options: " + JSON.stringify(options));
 

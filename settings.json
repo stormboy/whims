@@ -1,6 +1,11 @@
 {
-	"serverPort" : 8000,
-	"mqttHost" : "192.168.0.23",
-	"mqttPort" : 1883,
+	"port" : 8000,
+	"sockjs" : {
+		"websocket" : true
+	},
+	"mqtt" : {
+		"host" : "192.168.0.23",
+		"port" : 1883
+	},
 	"log" : false
 }
