@@ -13,12 +13,31 @@ define([
     ], 
 function($, Router, Util, EventEmitter, SockJS) {
 	
-	var TRACE = false;
+	var TRACE = false;			// enable logging
+	
+	// maximum number of event listeners
 	var MAX_LISTENERS = 1000;
 	
+	// sockjs reconnection time interval range
 	var MIN_RECON_INTERVAL = 10;
 	var MAX_RECON_INTERVAL = 10000;
 	
+	// Set the name of the hidden property and the change event for visibility
+	var hidden, visibilityChange;
+	if ( typeof document.hidden !== "undefined") {// Opera 12.10 and Firefox 18 and later support
+		hidden = "hidden";
+		visibilityChange = "visibilitychange";
+	} else if ( typeof document.mozHidden !== "undefined") {
+		hidden = "mozHidden";
+		visibilityChange = "mozvisibilitychange";
+	} else if ( typeof document.msHidden !== "undefined") {
+		hidden = "msHidden";
+		visibilityChange = "msvisibilitychange";
+	} else if ( typeof document.webkitHidden !== "undefined") {
+		hidden = "webkitHidden";
+		visibilityChange = "webkitvisibilitychange";
+	}
+
 	/**
 	 * Allows Meem communications to occur over sockjs
 	 */
@@ -36,7 +55,26 @@ function($, Router, Util, EventEmitter, SockJS) {
 		if (TRACE) {
 			console.log("creating new socket");
 		}
-		this._createSocket();		
+		this._createSocket();
+		
+		var self = this;
+		
+		// If the page is hidden, pause the meembus. If the page is shown, reconnect the meembus
+		function handleVisibilityChange() {
+			if (TRACE) {
+				console.log("visibility change. hidden: " + document[hidden]);
+			}
+			if (document[hidden]) {
+				self.pause = true;
+				self.close();
+			} else {
+				self.pause = false;
+				self._createSocket();
+			}
+		}
+		if ( typeof document.addEventListener !== "undefined" && typeof hidden !== "undefined") {
+			document.addEventListener(visibilityChange, handleVisibilityChange, false);
+		}
 	};
 	Util.inherits(MeemBus, EventEmitter);
 	
@@ -145,9 +183,11 @@ function($, Router, Util, EventEmitter, SockJS) {
 			}
 			self.emit("disconnected");
 			// try to reconnect after an interval
-			self._reconTimeout = setTimeout(function() {
-				self._createSocket();
-			}, self._getReconnectionInterval());
+			if (!self.pause) {
+				self._reconTimeout = setTimeout(function() {
+					self._createSocket();
+				}, self._getReconnectionInterval());
+			}
 		};
 
 		this.socket.onmessage = function (message) {

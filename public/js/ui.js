@@ -12,13 +12,60 @@ define([
     ], 
 function($, Router, Widgets, Util, EventEmitter) {
 
+	var TRACE = false;
+
+	var WidgetFactory = {
+		create: function(spec, meemBus) {
+			var component;
+			
+			switch (spec.widget) {
+		
+			case "BinaryButton":
+				component = new Widgets.Button({
+					meemBus : meemBus,
+					model   : spec,
+				});
+				break;
+				
+			case "VideoFeed":
+				component = new Widgets.VideoFeed({
+					meemBus : meemBus,
+					model   : spec,
+				});
+				break;
+	
+			case "LinearSlider":
+				component = new Widgets.LinearSlider({
+					meemBus : meemBus,
+					model   : spec,
+				});
+				break;
+	
+			case "LinearIndicator":
+				component = new Widgets.LinearIndicator({
+					meemBus : meemBus,
+					model   : spec,
+				});
+				break;
+				
+			case "DataChart":
+				component = new Widgets.LineChart({
+					meemBus : meemBus,
+					model   : spec,
+				});
+				break;
+				
+			// TODO more widget types
+			}
+			
+			return component;
+		},
+	};
+	
 	/**
 	 * Example:
 	 * new ControlPanel(meemBus, $("#title"), $("#controls"), $("#classSelectors"));
 	 */
-	
-	var TRACE = false;
-	
 	/**
 	 * titleElement: jQuery wrapped element
 	 * controlsElement: jQuery wrapped element
@@ -124,8 +171,9 @@ function($, Router, Widgets, Util, EventEmitter) {
 		// create UI control/state widgets
 		for (var i=0; i<data.widgets.length; i++) {
 			var widgetId = "_widget" + i;
-			var widget = data.widgets[i];
-			this.addWidget(widgetId, widget);
+			var widgetSpec = data.widgets[i];
+			widgetSpec.id = widgetId;
+			this.addWidget(widgetSpec);
 		}
 	
 		if (TRACE) {
@@ -166,82 +214,19 @@ function($, Router, Widgets, Util, EventEmitter) {
 	 * @param {Object} widgetId
 	 * @param {Object} widget
 	 */
-	ControlPanel.prototype.addWidget = function(widgetId, widget) {
+	ControlPanel.prototype.addWidget = function(spec) {
 		var self = this;
 		
 		// TODO if already laidOut, use isotope insert: self.controlsElement.isotope( 'insert', $newItems );
 		
-		// if (self.updateTimeout) {
-			// // clear re-layout timer
-			// clearTimeout(self.updateTimeout);
-		// }
-		
 		if (TRACE) {
-			console.log("adding widget: " + widget.widget);
+			console.log("adding widget: " + spec.widget);
 		}
 		
-		switch (widget.widget) {
-		
-		case "BinaryButton":
-			widget.id = widgetId;
-			var button = new Widgets.Button({
-				meemBus : self.meemBus,
-				model   : widget,
-			});
-			this.controlsElement.append(button.$el);
-			break;
-			
-		case "VideoFeed":
-			widget.id = widgetId;
-			var view = new Widgets.VideoFeed({
-				meemBus : self.meemBus,
-				model   : widget,
-			});
-			this.controlsElement.append(view.$el);
-			break;
-
-		case "LinearSlider":
-			widget.id = widgetId;
-			var view = new Widgets.LinearSlider({
-				meemBus : self.meemBus,
-				model   : widget,
-			});
-			this.controlsElement.append(view.$el);
-			break;
-
-		case "LinearIndicator":
-			widget.id = widgetId;
-			var view = new Widgets.LinearIndicator({
-				meemBus : self.meemBus,
-				model   : widget,
-			});
-			this.controlsElement.append(view.$el);
-			break;
-			
-		case "DataChart":
-			widget.id = widgetId;
-			var view = new Widgets.LineChart({
-				meemBus : self.meemBus,
-				model   : widget,
-			});
-			this.controlsElement.append(view.$el);
-			break;
-			
-		// TODO more widget types
+		var component = WidgetFactory.create(spec, this.meemBus);
+		if (component) {
+			this.controlsElement.append(component.$el);
 		}
-		
-		// relayout isotope container
-		// self.updateTimeout = setTimeout(function() {
-			// if (TRACE) {
-				// console.log("updating controls panel");
-			// }
-			// self.controlsElement.isotope({
-				// //layoutMode : 'fitRows'
-				// layoutMode : 'masonry'
-			// });
-			// self.updateTimeout = null;
-		// }, 100);
-	
 	};
 	
 	return {
