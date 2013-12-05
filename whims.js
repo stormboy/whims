@@ -58,8 +58,7 @@ server.listen(app.get('port'), function(){
 
 // create whims service (MQTT over socket.io)
 var options = { 
-	mqttHost: config.mqtt.host || "localhost", 
-	mqttPort: config.mqtt.port || 1883,
+	mqtt: config.mqtt || {},
 	log: config.log || {},
 	sockjs: config.sockjs || {}
 };
