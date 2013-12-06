@@ -25,8 +25,8 @@
 			"class" : "house",
 			"type" : "location"
 		},
-		{	"name" : "Bed 1",
-			"class" : "bed1",
+		{	"name" : "Kitchen",
+			"class" : "kitchen",
 			"type" : "location"
 		},
 		{	"name" : "Dining",
@@ -39,6 +39,10 @@
 		},
 		{	"name" : "Lounge",
 			"class" : "lounge",
+			"type" : "location"
+		},
+		{	"name" : "Bed 1",
+			"class" : "bed1",
 			"type" : "location"
 		}
 	],
@@ -97,6 +101,41 @@
 			"onText" : "on",
 			"offText" : "off"
 		},
+		
+		{	"name" : "Kitchen Light 1",
+			"widget" : "BinaryButton",
+			"path" : "/meem/hue_001788fffe0a6fdc-1",
+			"outFacet" : "in/binaryIn",
+			"inFacet" : "out/binaryOut",
+			"classes" : "kitchen light",
+			"onSymbol" : "<img src='images/icons/light-bulb.png'/>",
+			"offSymbol" : "<img src='images/icons/flower.png'/>",
+			"onText" : "on",
+			"offText" : "off"
+		},
+		{	"name" : "Kitchen Light 2",
+			"widget" : "BinaryButton",
+			"path" : "/meem/hue_001788fffe0a6fdc-2",
+			"outFacet" : "in/binaryIn",
+			"inFacet" : "out/binaryOut",
+			"classes" : "kitchen light",
+			"onSymbol" : "<img src='images/icons/light-bulb.png'/>",
+			"offSymbol" : "<img src='images/icons/flower.png'/>",
+			"onText" : "on",
+			"offText" : "off"
+		},
+		{	"name" : "Kitchen Light 3",
+			"widget" : "BinaryButton",
+			"path" : "/meem/hue_001788fffe0a6fdc-3",
+			"outFacet" : "in/binaryIn",
+			"inFacet" : "out/binaryOut",
+			"classes" : "kitchen light",
+			"onSymbol" : "<img src='images/icons/light-bulb.png'/>",
+			"offSymbol" : "<img src='images/icons/flower.png'/>",
+			"onText" : "on",
+			"offText" : "off"
+		},
+		
 		{	"name" : "Office Blinds",
 			"widget" : "BinaryButton",
 			"path" : "hs/site/smart/ui/officw/blinds",
