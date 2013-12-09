@@ -66,6 +66,7 @@ function($, Backbone, d3, ChartTemplate) {
 		
 		// refresh line-chart axes and labels
 		refresh: function() {
+			/*
 			var c = this.chartStuff;
 			var svg = c.svg.transition();
 			svg.select(".x.axis") 	// update the x axis
@@ -76,6 +77,7 @@ function($, Backbone, d3, ChartTemplate) {
 			    .call(c.yAxis);
 			svg.select(".y.unit")	// update the unit label
 			    .text(this.model.unit || "");
+			 */
 		},
 
 		events: {
@@ -186,7 +188,7 @@ function($, Backbone, d3, ChartTemplate) {
 				   .text(this.model.unit || "");
 	
 				c.svg.append("path").datum(data.values).attr("class", "line").attr("d", c.line);
-				
+
 				this._chartDrawn = true;
 			}
 		},

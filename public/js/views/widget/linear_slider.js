@@ -16,20 +16,22 @@ function($, Backbone, LinearTemplate) {
 
 		initialize : function(options) {
 			var self = this;
+			this.model = {
+				name: "Slider",
+				unit: "W",
+				path: "",
+				inFacet: "out/linearOutput",
+				outFacet: "in/linearInput",
+			};
+			for (var attrname in options.model) { this.model[attrname] = options.model[attrname]; }	// copy options to model
+		
 			this.meemBus = options.meemBus;
 			this.meemBus.subscribe(options.model.path + "/" + options.model.inFacet, function(message) {
 				self._acceptMessage(message);
 			});
+
 			
 			this.render();
-		},
-		
-		model : {
-			name: "Slider",
-			unit: "W",
-			path: "",
-			inFacet: "out/linearOutput",
-			outFacet: "in/linearInput",
 		},
 		
 		render: function () { 
@@ -44,15 +46,9 @@ function($, Backbone, LinearTemplate) {
 //			"click #offElement .toggleButton"     : "doOff",
 		},
 
-		doOn: function(event) {
+		_sendValue: function(value) {
 			var topic = this.model.path + "/" + this.model.outFacet;
-			var message = JSON.stringify({ value: true });
-			this.meemBus.publish(topic, message);
-		},
-		
-		doOff: function(event) {
-			var topic = this.model.path + "/" + this.model.outFacet;
-			var message = JSON.stringify({ value: false });
+			var message = JSON.stringify({ value: value, unit: this.model.unit });
 			this.meemBus.publish(topic, message);
 		},
 		

@@ -41,13 +41,27 @@ function($, Router, Widgets, Util, EventEmitter) {
 				});
 				break;
 	
+			case "LinearDial":
+				component = new Widgets.LinearDial({
+					meemBus : meemBus,
+					model   : spec,
+				});
+				break;
+	
+			case "LinearGauge":
+				component = new Widgets.LinearGauge({
+					meemBus : meemBus,
+					model   : spec,
+				});
+				break;
+				
 			case "LinearIndicator":
 				component = new Widgets.LinearIndicator({
 					meemBus : meemBus,
 					model   : spec,
 				});
 				break;
-				
+
 			case "DataChart":
 				component = new Widgets.LineChart({
 					meemBus : meemBus,
@@ -197,10 +211,12 @@ function($, Router, Widgets, Util, EventEmitter) {
 			onLayout : function($elems, instance) {
 				// refresh visible elements
 				$elems.each(function(i, elem) {
-					if (elem.refresh) {
-						elem.refresh();
-					}
+					//if (elem.refresh) {
+					//	elem.refresh();
+					//}
+					$(elem).hide().show(0);	// force refresh (especially Chrome SVG)
 				});
+				//self.controlsElement.hide().show();
 				self.laidOut = true;
 				self.emit("layout");
 			},

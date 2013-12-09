@@ -60,8 +60,16 @@ function($, Backbone, ButtonTemplate) {
 			try {
 				var value = message.value;
 				if (this.lastValue != value) {
-					this.$el.find("#offElement .number").text(value ? "0" : "1");
-					this.$el.find("#onElement .number").text(value ? "1" : "0");
+					$onEl = value ? this.$el.find("#onElement") : this.$el.find("#offElement");
+					$offEl = value ? this.$el.find("#offElement") : this.$el.find("#onElement");
+					
+					$onEl.find(".number").text("1");
+					$offEl.find(".number").text("");
+					
+					$onEl.css("-webkit-filter", "saturate(200%) brightness(150%)");
+					//$onEl.css("border-style", "inset");
+					$offEl.css("-webkit-filter", "none");
+					//$offEl.css("border-style", "outset");
 					
 					// animate button
 //					if (value) {
