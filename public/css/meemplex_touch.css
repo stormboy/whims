@@ -247,13 +247,13 @@ div#container {
 	height: 85px;
 	max-height: 85px;
 	max-width: 2200px;
-	width: 1300px;
-	padding: 0 10px;
+	width: 1400px;
+	/*padding: 0 10px;*/
 }
 
 #locationSelectors {
 	float: left;
-	margin-left: 30px;
+	margin-left: 110px;
 }
 #functionSelectors {
 	float: left;
@@ -262,7 +262,7 @@ div#container {
 #classSelectors button {
 	font-size: 20px;
 	width: 110px;
-	height: 55px;
+	height: 85px;
 	/*
 	margin: 2px;
 	text-shadow: 0 1px hsla( 0, 0%, 100%, 0.5 );
