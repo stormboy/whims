@@ -4,24 +4,24 @@
 
 function Facets() {
 	this.facets = {};
-	this.facets[Binary.type]  = Binary;
-	this.facets[Linear.type] = Linear,
-	this.facets[Category.type] = Category 
-}
+	this.facets[Binary.type]   = Binary;
+	this.facets[Linear.type]   = Linear;
+	this.facets[Category.type] = Category;
+};
 
 Facets.prototype.marshal = function(facetType, value) {
 	var facet = this.facets[facetType];
 	//console.log("got facet type for marshal: " + facet);
 	
 	return facet.marshal(value);
-}
+};
 
 Facets.prototype.unmarshal = function(facetType, expression) {
 	var facet = this.facets[facetType];
 	//console.log("got facet type for unmarshal: " + facet);
 	
 	return facet.unmarshal(expression);
-}
+};
 
 
 function Binary(name, direction) {
