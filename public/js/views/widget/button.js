@@ -44,14 +44,14 @@ function($, Backbone, ButtonTemplate) {
 		doOn: function(event) {
 			//console.log("sending on");
 			var topic = this.model.path + "/" + this.model.outFacet;
-			var message = JSON.stringify({ value: true });
+			var message = { value: true };
 			this.meemBus.publish(topic, message);
 		},
 		
 		doOff: function(event) {
 			//console.log("sending off");
 			var topic = this.model.path + "/" + this.model.outFacet;
-			var message = JSON.stringify({ value: false });
+			var message = { value: false };
 			this.meemBus.publish(topic, message);
 		},
 		
