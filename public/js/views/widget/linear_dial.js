@@ -21,17 +21,18 @@ function($, Knob, Backbone, DialTemplate) {
 				name: "Dial",
 				unit: "W",
 				path: "",
+				step: 1,
 				inFacet: "out/linearOutput",
 				outFacet: "in/linearInput",
 			};
 			for (var attrname in options.model) { this.model[attrname] = options.model[attrname]; }	// copy options to model
 
+			this.render();
+			
 			this.meemBus = options.meemBus;
 			this.meemBus.subscribe(options.model.path + "/" + options.model.inFacet, function(message) {
-				self._acceptMessage(message);
+				self._handleMessage(message);
 			});
-			
-			this.render();
 		},
 		
 		render: function () { 
@@ -42,12 +43,13 @@ function($, Knob, Backbone, DialTemplate) {
 			this.$el.find("input").knob({
 				min: this.model.min,
 				max: this.model.max,
+				step: this.model.step,
 				angleOffset: -125,
 				angleArc: 250,
 				width: 160,
 				height: 140,
 				release: function(value) { 
-					console.log("release: " + value); 
+					//console.log("release: " + value); 
 				},
 				change: function(value) { 
 					self._sendValue(value); 
@@ -68,11 +70,12 @@ function($, Knob, Backbone, DialTemplate) {
 			this.meemBus.publish(topic, message);
 		},
 		
-		_acceptMessage: function(message) {
+		_handleMessage: function(message) {
 			try {
+				//console.log("got value: " + message.value);
 				var value = message.value;
 				if (this.lastValue != value) {
-					this.$el.val(value);		// display value
+					this.$el.find("input").val(value).change();		// display value
 					this.lastValue = value;
 				}
 			}

@@ -272,8 +272,18 @@
 			"inFacet" : "out",
 			"outFacet" : "in",
 			"unit" : "dB",
+			"min": -60,
+			"max": 0,
+			"step": 1,
 			"classes" : "lounge av",
 			"symbol" : "<img src='images/icons/eye-watch.png'/>"
+		},
+		{	"name" : "AV Transport",
+			"widget" : "AvTransport",
+			"path" : "/house/lounge/avr/transport",
+			"inFacet" : "out",
+			"outFacet" : "in",
+			"classes" : "lounge av"
 		},
 		{	"name" : "Security",
 			"widget" : "LinearIndicator",

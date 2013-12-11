@@ -1,13 +1,13 @@
 {
   "name"         : "whims",
-  "version"      : "0.0.3",
+  "version"      : "0.0.4",
   "main"         : "whims.js",
   "scripts"      : {
     "start"        : "node whims",
     "preinstall"   : "./node_modules/requirejs/bin/r.js -o app.build.js"
   },
   "dependencies" : {
-    "express"      : "3.2.x",
+    "express"      : "3.4.x",
     "jade"         : "*",
     "stylus"       : "*",
     "sockjs"       : "*",
@@ -16,13 +16,11 @@
     "node-uuid"    : "*"
   },
   "devDependencies" : {
-  	"meem"         : "*",
-  	"meem-hue"     : "*",
-  	"meem-avr"     : "*",
-  	"meem-nest"    : "*",
-  	"meem-zbee"    : "*",
-  	"meem-raven"   : "*",
-  	"meem-datalog" : "*"
+  	"meem"         : "stormboy/node-meem",
+  	"meem-hue"     : "stormboy/node-meem-hue",
+  	"meem-nest"    : "stormboy/node-meem-nest",
+  	"meem-raven"   : "stormboy/node-meem-raven",
+  	"meem-datalog" : "stormboy/node-meem-datalog"
   },
   "repository"   : { 
     "type"         : "git",

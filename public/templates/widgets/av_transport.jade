@@ -1,0 +1,14 @@
+div(id='#{id}', class='widget avtransport #{classes}')
+  .widgetTitle= name
+  .buttons
+    a.previous
+    a.rewind
+    a.play
+    a.pause
+    a.stop
+    a.fastforward
+    a.next
+  .seek
+    .position 0.00
+    input.slider(type="range", name="slider", min="0", max="100")
+    .length 1:25
