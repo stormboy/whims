@@ -8,7 +8,7 @@
  *
  * http://www.justgage.com
  */
-define(function (require, exports, module) {
+define(["raphael"], function (Raphael) {
 	
 	var JustGage = function(config) { 
 	  
