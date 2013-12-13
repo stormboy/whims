@@ -23,7 +23,11 @@ function($, Backbone, ButtonTemplate) {
 			
 			this.meemBus = options.meemBus;
 			this.meemBus.subscribe(this.model.path + "/" + this.model.inFacet, function(message) {
-				self._acceptMessage(message);
+				self._handleMessage(message);
+			});
+			
+			this.meemBus.subscribe(this.model.path + "/out/propertiesOut", function(message) {
+				self._handleProperties(message);
 			});
 			
 			this.render();
@@ -55,7 +59,7 @@ function($, Backbone, ButtonTemplate) {
 			this.meemBus.publish(topic, message);
 		},
 		
-		_acceptMessage: function(message) {
+		_handleMessage: function(message) {
 			//console.log("handing binary message: " + message);
 			try {
 				var value = message.value;
@@ -87,6 +91,25 @@ function($, Backbone, ButtonTemplate) {
 				// problem
 			}
 		},
+		
+		_handleProperties: function(message) {
+			try {
+				switch(message.type) {
+				case "propertyChange":
+					if (message.property.name == "name") {
+						this.$el.find(".widgetTitle").html(message.property.value);
+					}
+					break;
+				case "properties":
+					if (message.properties.name) {
+						this.$el.find(".widgetTitle").html(message.properties.name.value);
+					}
+					break;
+				}
+			}
+			catch (e) {
+			}
+		}
 	});
 	
 	return ButtonView;
