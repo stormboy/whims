@@ -19,7 +19,7 @@
   	"meem"         : "stormboy/node-meem",
   	"meem-hue"     : "stormboy/node-meem-hue",
   	"meem-nest"    : "stormboy/node-meem-nest",
-  	"meem-raven"   : "stormboy/node-meem-raven",
+  	"meem-raven"   : "stormboy/node-raven",
   	"meem-datalog" : "stormboy/node-meem-datalog"
   },
   "repository"   : { 
