@@ -33,6 +33,8 @@ define(["raphael"], function (Raphael) {
 	    // color of gauge title 
 	    titleFontColor : (config.titleFontColor) ? config.titleFontColor : "#999999",
 	    
+	    titleFontSize : config.titleFontSize,
+	    
 	    // value : int
 	    // value gauge is showing 
 	    value : (config.value) ? config.value : 0,
@@ -139,7 +141,7 @@ define(["raphael"], function (Raphael) {
 	  var dy = (canvasH - widgetH)/2;
 	  
 	  // title 
-	  var titleFontSize = ((widgetH / 8) > 10) ? (widgetH / 10) : 10;
+	  var titleFontSize = config.titleFontSize || ( ((widgetH / 8) > 10) ? (widgetH / 10) : 10 );
 	  var titleX = dx + widgetW / 2;
 	  var titleY = dy + widgetH / 6.5;
 	  

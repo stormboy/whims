@@ -33,6 +33,10 @@ function($, Knob, Backbone, DialTemplate) {
 			this.meemBus.subscribe(options.model.path + "/" + options.model.inFacet, function(message) {
 				self._handleMessage(message);
 			});
+			
+			this.meemBus.subscribe(this.model.path + "/out/propertiesOut", function(message) {
+				self._handleProperties(message);
+			});
 		},
 		
 		render: function () { 
@@ -46,6 +50,8 @@ function($, Knob, Backbone, DialTemplate) {
 				step: this.model.step,
 				angleOffset: -125,
 				angleArc: 250,
+				// angleOffset: -90,
+				// angleArc: 180,
 				width: 160,
 				height: 140,
 				release: function(value) { 
@@ -83,6 +89,24 @@ function($, Knob, Backbone, DialTemplate) {
 				// problem
 			}
 		},
+		_handleProperties: function(message) {
+			try {
+				switch(message.type) {
+				case "propertyChange":
+					if (message.property.name == "name") {
+						this.$el.find(".widgetTitle").html(message.property.value);
+					}
+					break;
+				case "properties":
+					if (message.properties.name) {
+						this.$el.find(".widgetTitle").html(message.properties.name.value);
+					}
+					break;
+				}
+			}
+			catch (e) {
+			}
+		}		
 	});
 	
 	return DialView;

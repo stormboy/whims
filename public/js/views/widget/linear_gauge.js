@@ -52,7 +52,9 @@ function($, Backbone, JustGage, GaugeTemplate) {
 					valueFontColor: "#cccccc",
 					levelColors: ["#11ee11", "#adff2f", "#ff8c00", "#ee1111"],
 					levelColorsGradient: true,
-					showMinMax: false
+					showMinMax: false,
+					titleFontColor: "#CCC",
+					titleFontSize: 14,
 				});
 			}, 50);
 

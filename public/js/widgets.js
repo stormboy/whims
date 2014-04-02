@@ -7,8 +7,9 @@ define([
     	'views/widget/line_chart',
     	'views/widget/video_feed',
     	'views/widget/av_transport',
+    	'views/widget/color_wheel',
     ], 
-function(Button, LinearSlider, LinearDial, LinearIndicator, LinearGauge, LineChart, VideoFeed, AvTransport) {
+function(Button, LinearSlider, LinearDial, LinearIndicator, LinearGauge, LineChart, VideoFeed, AvTransport, ColorWheel) {
 	var Widgets = {
 		Button          : Button,
 		LinearSlider    : LinearSlider,
@@ -18,6 +19,7 @@ function(Button, LinearSlider, LinearDial, LinearIndicator, LinearGauge, LineCha
 		LineChart       : LineChart,
 		VideoFeed       : VideoFeed,
 		AvTransport     : AvTransport,
+		ColorWheel      : ColorWheel,
 	};
 	
 	var WidgetFactory = {
@@ -77,6 +79,13 @@ function(Button, LinearSlider, LinearDial, LinearIndicator, LinearGauge, LineCha
 				
 			case "AvTransport":
 				component = new Widgets.AvTransport({
+					meemBus : meemBus,
+					model   : spec,
+				});
+				break;
+				
+			case "ColorWheel":
+				component = new Widgets.ColorWheel({
 					meemBus : meemBus,
 					model   : spec,
 				});

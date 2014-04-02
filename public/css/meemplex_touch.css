@@ -198,7 +198,6 @@ div#container {
 	width: 90px;
 	height: 50px;
 }
-
 .element .ui-button-text * {
 	position: static;
 	display: block;
@@ -225,7 +224,7 @@ div#container {
 	position: absolute;
 	width: 100%;
 	top: 40px;
-	bottom: 85px;
+	bottom: 60px;
 	overflow-y: scroll;
 }
 
@@ -244,10 +243,10 @@ div#container {
 }
 
 #classSelectors {
-	height: 85px;
-	max-height: 85px;
-	max-width: 2200px;
-	width: 1400px;
+	height: 60px;
+	max-height: 60px;
+	max-width: 4200px;
+	min-width: 1600px;
 	/*padding: 0 10px;*/
 }
 
@@ -262,7 +261,7 @@ div#container {
 #classSelectors button {
 	font-size: 20px;
 	width: 110px;
-	height: 85px;
+	height: 60px;
 	/*
 	margin: 2px;
 	text-shadow: 0 1px hsla( 0, 0%, 100%, 0.5 );

@@ -18,6 +18,7 @@ require.config({
 		quantities :          "lib/quantities",
 		justgage :            "lib/justgage.1.0.1",
 		jqueryknob :          "lib/jquery.knob",
+		colorwheel :          "lib/colorwheel",
 		util :                "lib/util",
 	},
 	"shim": {
