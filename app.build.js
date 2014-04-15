@@ -11,6 +11,7 @@
     dir:            "public-build",
     modules:        [{name: "main"}],
     mainConfigFile: "public/js/main.js",
+    preserveLicenseComments: false,
     pragmasOnSave: {
     	  excludeJade: true
     }
