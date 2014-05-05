@@ -418,7 +418,7 @@
 			"path" : "/house/thermostat/Home",
 			"inFacet" : "currentTemperature",
 			"unit" : "°C",
-			"hours" : 24,
+			"hours" : 96,
 			"classes" : "hvac",
 			"queryPath" : "/data/log",
 			"responsePath": "/response/house/thermostat/Home",

@@ -91,6 +91,14 @@ function($, Backbone, d3, ChartTemplate) {
 				// TODO unit conversion
 				//value = UnitTools.convert(data.value, data.unit, this.unit);
 				
+				// push out entries that are too old
+				if (this._data.length > 0) {
+					var oldest = d3.time.hour.offset(new Date(), -(this.model.hours || 1));
+					for (var first=this._data[0]; first[0] < oldest; first=this._data[0]) {
+						this._data.shift();
+					}
+				}
+
 				var format = d3.time.format.iso;
 				var time = format.parse(timestamp).getTime();
 				var val = [time, value];
