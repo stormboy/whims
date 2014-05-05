@@ -161,8 +161,14 @@ function($, Backbone, d3, ChartTemplate) {
 				d[0] = new Date(d[0]);
 				d[1] = +d[1];			// make value a number
 			});
+			var ye = d3.extent(data.values, function(d) { return d[1]; });
+			if (ye[0] == ye[1]) {
+				// force an extent beyond range of 0
+				ye[0] -= 0.5;
+				ye[1] += 0.5;
+			}
 			c.x.domain(d3.extent(data.values, function(d) { return d[0]; }));
-			c.y.domain(d3.extent(data.values, function(d) { return d[1]; }));
+			c.y.domain(ye);
 
 			if (this._chartDrawn) {
 				var svg = c.svg.transition();
@@ -177,10 +183,13 @@ function($, Backbone, d3, ChartTemplate) {
 		            .call(c.yAxis);				
 			}
 			else {
-				c.svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + c.height + ")")
+				c.svg.append("g")
+					.attr("class", "x axis")
+					.attr("transform", "translate(0," + c.height + ")")
 				   .call(c.xAxis);
 	
-				c.svg.append("g").attr("class", "y axis")
+				c.svg.append("g")
+					.attr("class", "y axis")
 				   .call(c.yAxis)
 				   .append("text")
 				   .attr("class", "y unit")
