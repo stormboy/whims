@@ -12,6 +12,9 @@
     modules:        [{name: "main"}],
     mainConfigFile: "public/js/main.js",
     preserveLicenseComments: false,
+    optimize: "uglify2",
+    optimizeCss: "standard",
+    skipDirOptimize: true,
     pragmasOnSave: {
     	  excludeJade: true
     }
