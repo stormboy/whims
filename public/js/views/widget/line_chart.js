@@ -92,10 +92,12 @@ function($, Backbone, d3, ChartTemplate) {
 				//value = UnitTools.convert(data.value, data.unit, this.unit);
 				
 				// push out entries that are too old
-				if (this._data.length > 0) {
-					var oldest = d3.time.hour.offset(new Date(), -(this.model.hours || 1));
-					for (var first=this._data[0]; first[0] < oldest; first=this._data[0]) {
-						this._data.shift();
+				if (this._data.values.length > 0) {
+					var oldest = d3.time.hour.offset(new Date(), -(this.model.hours || 1)).getTime();
+					//console.log("first: " + this._data.values[0][0] + " oldest: " + oldest);
+					for (var first=this._data.values[0]; this._data.values.length > 0 && first[0].getTime() < oldest; first=this._data.values[0]) {
+						//console.log("removing old value: " + first[0] + " : " + first[1]);
+						this._data.values.shift();
 					}
 				}
 
@@ -166,7 +168,9 @@ function($, Backbone, d3, ChartTemplate) {
 			var c = this.chartStuff;
 			// pre-processing
 			data.values.forEach(function(d) {
-				d[0] = new Date(d[0]);
+				if (typeof d[0] == "number") {
+					d[0] = new Date(d[0]);
+				}
 				d[1] = +d[1];			// make value a number
 			});
 			var ye = d3.extent(data.values, function(d) { return d[1]; });
