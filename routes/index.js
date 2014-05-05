@@ -6,6 +6,7 @@ exports.init = function(app) {
 	app.get('/',      touch.show);
 	app.get('/touch', touch.show);
 	app.get('/chart', chart.line);
+	app.get('/camera', exports.camera);
 	//app.get('/js/bundle.js', browserify('../lib/client/bundle.js'));
 }
 
@@ -38,3 +39,28 @@ exports.error = function(err, req, res, next) {
 		next();
 	}
 }
+
+var http = require("http");
+
+/**
+ * TODO genericise this proxy for web cameras
+ */
+exports.camera = function(req, res) {
+	var options = {hostname: "192.168.0.2", path: "/mjpg/video.mjpg?resolution=352x240"};
+	var proxy_request = http.request(options);
+	proxy_request.addListener('response', function (proxy_response) {
+		proxy_response.addListener('data', function(chunk) {
+			res.write(chunk, 'binary');
+		});
+		proxy_response.addListener('end', function() {
+			res.end();
+		});
+		res.writeHead(proxy_response.statusCode, proxy_response.headers);
+	});
+	req.addListener('data', function(chunk) {
+		proxy_request.write(chunk, 'binary');
+	});
+	req.addListener('end', function() {
+		proxy_request.end();
+	});
+};

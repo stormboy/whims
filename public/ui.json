@@ -384,7 +384,7 @@
 		},
 		{	"name" : "Front Feed",
 			"widget" : "VideoFeed",
-			"url" : "http://192.168.0.2/mjpg/video.mjpg?resolution=352x240",
+			"url" : "camera",
 			"width" : 355,
 			"height" : 240,
 			"classes" : "house security"
