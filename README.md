@@ -1,6 +1,6 @@
 WHIMS
 =====
-###(Web Hyperspace Interface via MQTT over SockJS)
+### (Web Hyperspace Interface via MQTT over SockJS)
 
 This project provides a web interface to a MQTT service.  It also supplies a module for creating "things" that interact over MQTT.
 
